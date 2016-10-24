@@ -1,0 +1,290 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<html style="height: 100%;">
+<head>
+	<title>_TITLE_ - _COMPOSER_ - Partitur Player</title>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    
+    <style>
+        #divContainer, #divResize{ 
+            border:dashed 2px #CCC; 
+            width:46%; 
+            height:120px; 
+            padding:5px; 
+            margin:5px; 
+            top: 50%;
+            left: 50%;
+            font:13px Arial; 
+            cursor:move; 
+            float:left 
+            z-index: 1000;
+            display: 'block';
+		}
+        #settings { 
+            border:dashed 2px #CCC; 
+            width:46%; 
+            height:120px; 
+            padding:5px; 
+            margin:5px; 
+            top: 2%;
+            left: 50%;
+            font:13px Arial; 
+            cursor:move; 
+            float:left 
+        } 		
+		table {
+			border:0px solid #CCC;
+			border-collapse:collapse;
+		}
+		td 		{
+			border:none;
+		}
+textarea {
+    overflow-y: scroll;
+    height: 400px;
+    resize: none; /* Remove this if you want the user to resize the textarea */
+}
+a.button {
+  border-style: solid;
+  border-width : 1px 1px 1px 1px;
+  text-decoration : none;
+  padding : 4px;
+  border-color : #000000;
+
+}
+body {
+  font-family: Arial;
+}
+    </style>
+	<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       if(e.style.display == 'block')
+          e.style.display = 'none';
+       else
+          e.style.display = 'block';
+    }
+//-->
+</script>
+<script>
+function fmtMSS(s){return(s-(s%=60))/60+(9<s?':':':0')+s}
+
+var recordcursor = 0;
+//Load files
+
+opus = "_OPUS_";
+
+var xhr = new XMLHttpRequest();
+
+xhr.open('GET', '_OPUS_/score', false);
+xhr.send(null);
+
+var trackscore = xhr.responseText.split('\n');
+
+$(document).ready(function() {		
+	$("#textarea").html(xhr.responseText);
+});	
+</script>	
+
+<script src="https://www.youtube.com/iframe_api"></script>
+	
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+</head>
+
+<body style="height: 100%;">
+	<div id="divResize" style="width:47%; height:45%;z-index: 1000;"><br><div id="player"><br></div></div>
+	
+	<!--_BEGINEDITOR_-->
+	<div id="recordframe"><br>
+	<table bgcolor="#00FF00"><tr>
+	<td><input type="button" id="markbtn" value="Mark"></td>
+	<td><div id="indicator">0</div>Cursor</td>
+	<td><div id="indicator2">0</div>Page</td>
+	</tr></table>
+	<textarea id="textarea" style="width:300; height:400;" rows="20"></textarea>
+	<script>
+	var recordcursor = 0;
+		
+	$(document).ready(function() {
+		$("#markbtn").click( function() {
+			t = player.getCurrentTime();
+			var lines = $('#textarea').val().split(/\n/);
+			lines[recordcursor] = t.toString();
+			$("#textarea").val(lines.join("\n"));
+			trackscore = $('#textarea').val().split(/\n/);
+			
+			recordcursor += 1;
+			$("#indicator").html(recordcursor);
+		});
+	});	
+	$(document).ready(function() {		
+		$("#textarea").click( function() {
+			trackscore = $('#textarea').val().split(/\n/);
+			recordcursor = textarea.value.substr(0, textarea.selectionStart).split("\n").length - 1;
+			$("#indicator").html(recordcursor);
+			player.seekTo($('#textarea').val().split(/\n/)[recordcursor - 1]);
+		});
+	});	
+	</script>
+	</div>
+	
+	<!--_ENDEDITOR_-->
+	
+   <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+    <script>
+      // 2. This code loads the IFrame Player API code asynchronously.
+      var tag = document.createElement('script');
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      // 3. This function creates an <iframe> (and YouTube player)
+      //    after the API code downloads.
+      var player;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          height: '93%',
+          width: '93%',
+          videoId: 'SfcEfYN6PjU',
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+        });
+      }
+
+      // 4. The API will call this function when the video player is ready.
+      function onPlayerReady(event) {
+        event.target.playVideo();
+      }
+
+      // 5. The API calls this function when the player's state changes.
+      //    The function indicates that when playing a video (state=1),
+      //    the player should play for six seconds and then stop.
+      var done = false;
+      function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+          //setTimeout(stopVideo, 6000);
+          done = true;
+        }
+      }
+      function stopVideo() {
+        player.stopVideo();
+      }
+    </script>
+	
+	
+	
+<table id="container" style="vertical-align: top; width: 100%; height:90%; top:0px; left:0px; position:absolute; z-index: 100;" border="0">
+<tr>
+<td width="50%" style="padding:3px">
+<h2 style="display:inline;">_TITLE_ </h2>  
+_COMPOSER_
+<div id="bar" style="color:#ffffff; background-color:#000000; padding:0px;">Page 1 - 0:00</div>
+<div id="barcontainer" style="width:100%; height:2px;pading:3px">
+  <div id="progress-bar" style="background-color:#ff0000;height:2px;transition:200ms linear;">
+  </div>
+</div>
+<br>
+<a class="button" href="#" onclick="toggle_visibility('divResize');">Toggle player</a>
+</td>
+<td width="50%">
+<table padding="5px" style="color:'grey';font-size: .83em;">
+<tr><td style="padding:5px; vertical-align:top"><b>Score</b></td><td style="padding:5px; vertical-align:top">_SCORE_</td></tr>
+<tr><td style="padding:5px; vertical-align:top"><b>Music</b></td><td style="padding:5px; vertical-align:top">_MUSIC_</td></tr>
+</table>
+</td>
+</tr>
+<tr height="90%">
+<td width="50%">
+	
+<img id="score" style="width:100%; height:90%;" src="_OPUS_/media/_OPUS_-0.png" name="edit-save" />
+    
+</td>
+
+<td width="50%">
+<img id="score2" style="width:100%; height:90%;" src="_OPUS_/media/_OPUS_-0.png" name="edit-save"/>
+    
+</td>
+</tr>
+</table>
+
+<script>
+	
+	
+setInterval(function update() {
+	t = player.getCurrentTime();
+	//console.log(t);
+	
+	$("#indicator").html(recordcursor);
+	
+	//UPDATE SCORE
+	cursor = 0;
+	while (parseInt(trackscore[cursor]) < t) {
+		cursor = cursor + 1;
+	}
+	cursor = cursor - 1;
+	if (($("cursorscore").src != "_OPUS_/media/_OPUS_-" + cursor.toString() + ".png") && (cursor >= 0))  {
+		document.getElementById("score").src="_OPUS_/media/_OPUS_-" + cursor.toString() + ".png";
+	}
+	if (cursor + 1 <= trackscore.length - 1) {
+		var duration = trackscore[cursor + 1] - trackscore[cursor];
+		var remaining = trackscore[cursor + 1] - t;
+		var percent = (1 - remaining / parseFloat(duration))*100;
+	}
+	else {
+		percent = 100;
+	}
+	console.log(percent);
+	var elem = document.getElementById('progress-bar');
+	var elem2 = document.getElementById('barcontainer');
+	elem.style.width = percent.toString() + "%";
+	if ( (cursor & 1) == 0 )
+	{ 
+		elem.style.backgroundColor = "#ff0000";
+		elem2.style.backgroundColor = "#000000";
+		}
+	else
+	{ 
+		elem.style.backgroundColor = "#000000";
+		elem2.style.backgroundColor = "#ff0000";
+		} 
+	
+	cursor = cursor + 1;
+	if((document.getElementById("score2").src != "_OPUS_/media/_OPUS_-" + cursor.toString() + ".png") && (cursor >= 0)) {
+		document.getElementById("score2").src="_OPUS_/media/_OPUS_-" + cursor.toString() + ".png";
+	}
+
+	recordcursor = cursor;
+	$("#indicator2").html(cursor - 1);
+	$("#indicator").html(recordcursor);
+	$("#bar").html("Page " + recordcursor.toString() + " - " + fmtMSS(Math.floor(t)));
+	$("#textarea").scrollTop = cursor;
+	
+}, 200);
+
+</script>
+<script>
+    var element_pos = 0; 
+    var iCnt = 0;
+    $(document).ready(function() {
+
+        $(function() {
+			$('#divContainer').draggable(); 
+			
+			});
+        $(function() {
+			$("#divResize").draggable().resizable();
+				containment: 'container'
+			
+			});
+			
+
+    });
+</script>
+
+</body>
+</html>
