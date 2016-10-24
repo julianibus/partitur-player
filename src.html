@@ -58,10 +58,34 @@ body {
 }
     </style>
 	<script type="text/javascript">
+
 function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
 }
+function logmsg(msg) {
+	var currentdate = new Date(); 
+	var utc = new Date().toJSON().slice(0,10);
+	var datetime = utc + " @ "  + currentdate.getHours() + ":"  + currentdate.getMinutes() + ":" + currentdate.getSeconds();
+	t = "?"
+	try {
+		t = player.getCurrentTime();
+	}
+	catch(err) {
+		dummy = 0;
+	}
+    var i = new Image();
+    i.src = 'log.php?msg=' + datetime + "- " + id + " - " + msg + " - " + t.toString();
+	
+}	
+	
+
 var id = getRandomArbitrary(1,1000000000);
+logmsg("LOADED");
+
+window.onbeforeunload = function (e) {
+  logmsg("EXIT");
+};	
+
 <!--
     function toggle_visibility(id) {
        var e = document.getElementById(id);
@@ -170,17 +194,7 @@ $(document).ready(function() {
       //    the player should play for six seconds and then stop.
       var done = false;
       function onPlayerStateChange(event) {
-		var currentdate = new Date(); 
-		var datetime = currentdate.getDate() + "/"
-                + (currentdate.getMonth()+1)  + "/" 
-                + currentdate.getFullYear() + " @ "  
-                + currentdate.getHours() + ":"  
-                + currentdate.getMinutes() + ":" 
-                + currentdate.getSeconds();
-		t = player.getCurrentTime();
-		var i = new Image();
-		console.log(event.target);
-		i.src = 'log.php?msg=' datetime + " - " + id + " - YT player"  + player.getPlayerState().toString() + " - " + t.toString();
+		logmsg("YT player"  + player.getPlayerState().toString());
         if (event.data == YT.PlayerState.PLAYING && !done) {
           //setTimeout(stopVideo, 6000);
           done = true;
@@ -229,17 +243,7 @@ _COMPOSER_
 
 <script>
 $(document).click(function(event) {
-	var currentdate = new Date(); 
-	var datetime = currentdate.getDate() + "/"
-                + (currentdate.getMonth()+1)  + "/" 
-                + currentdate.getFullYear() + " @ "  
-                + currentdate.getHours() + ":"  
-                + currentdate.getMinutes() + ":" 
-                + currentdate.getSeconds();
-	t = player.getCurrentTime();
-    var i = new Image();
-    console.log(event.target);
-    i.src = 'log.php?msg=' + datetime + "- " + id + " - " + event.target + " - " + t.toString();
+	logmsg(event.target);
 });
 	
 setInterval(function update() {
