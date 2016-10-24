@@ -148,7 +148,7 @@ $(document).ready(function() {
         player = new YT.Player('player', {
           height: '93%',
           width: '93%',
-          videoId: 'SfcEfYN6PjU',
+          videoId: '_CODE_',
           events: {
             'onReady': onPlayerReady,
             'onStateChange': onPlayerStateChange
@@ -185,7 +185,7 @@ $(document).ready(function() {
 _COMPOSER_
 <div id="bar" style="color:#ffffff; background-color:#000000; padding:0px;">Page 1 - 0:00</div>
 <div id="barcontainer" style="width:100%; height:2px;pading:3px">
-  <div id="progress-bar" style="background-color:#ff0000;height:2px;transition:200ms linear;">
+  <div id="progress-bar" style="background-color:#ff0000;height:2px;transition:300ms linear;">
   </div>
 </div>
 <br>
@@ -264,7 +264,7 @@ setInterval(function update() {
 	$("#bar").html("Page " + recordcursor.toString() + " - " + fmtMSS(Math.floor(t)));
 	$("#textarea").scrollTop = cursor;
 	
-}, 200);
+}, 300);
 
 </script>
 <script>
