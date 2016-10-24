@@ -58,6 +58,10 @@ body {
 }
     </style>
 	<script type="text/javascript">
+function getRandomArbitrary(min, max) {
+    return Math.random() * (max - min) + min;
+}
+var id = getRandomArbitrary(1,1000000000);
 <!--
     function toggle_visibility(id) {
        var e = document.getElementById(id);
@@ -166,6 +170,17 @@ $(document).ready(function() {
       //    the player should play for six seconds and then stop.
       var done = false;
       function onPlayerStateChange(event) {
+		var currentdate = new Date(); 
+		var datetime = currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + " @ "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+		t = player.getCurrentTime();
+		var i = new Image();
+		console.log(event.target);
+		i.src = 'log.php?msg=' datetime + " - " + id + " - YT player"  + player.getPlayerState().toString() + " - " + t.toString();
         if (event.data == YT.PlayerState.PLAYING && !done) {
           //setTimeout(stopVideo, 6000);
           done = true;
@@ -185,17 +200,17 @@ $(document).ready(function() {
 _COMPOSER_
 <div id="bar" style="color:#ffffff; background-color:#000000; padding:0px;">Page 1 - 0:00</div>
 <div id="barcontainer" style="width:100%; height:2px;pading:3px">
-  <div id="progress-bar" style="background-color:#ff0000;height:2px;transition:300ms linear;">
+  <div id="progress-bar" style="background-color:#ff0000;height:3px;transition:300ms linear;">
   </div>
 </div>
 <br>
 <a class="button" href="#" onclick="toggle_visibility('divResize');">Toggle player</a>
 </td>
-<td width="50%">
-<table padding="5px" style="color:'grey';font-size: .83em;">
-<tr><td style="padding:5px; vertical-align:top"><b>Score</b></td><td style="padding:5px; vertical-align:top">_SCORE_</td></tr>
-<tr><td style="padding:5px; vertical-align:top"><b>Music</b></td><td style="padding:5px; vertical-align:top">_MUSIC_</td></tr>
-</table>
+<td style="padding:10px" width="50%">
+<div style="color:#999999;">
+<b>Score </b>_SCORE_
+<b>Music </b>_MUSIC_
+</div>
 </td>
 </tr>
 <tr height="90%">
@@ -213,7 +228,19 @@ _COMPOSER_
 </table>
 
 <script>
-	
+$(document).click(function(event) {
+	var currentdate = new Date(); 
+	var datetime = currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + " @ "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+	t = player.getCurrentTime();
+    var i = new Image();
+    console.log(event.target);
+    i.src = 'log.php?msg=' + datetime + "- " + id + " - " + event.target + " - " + t.toString();
+});
 	
 setInterval(function update() {
 	t = player.getCurrentTime();
@@ -285,6 +312,8 @@ setInterval(function update() {
 
     });
 </script>
+
+_TRACKING_
 
 </body>
 </html>

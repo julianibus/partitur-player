@@ -30,6 +30,7 @@ fclose($fh);
 $info = $assoc_array;
 
 $src = file_get_contents("src.html");
+$trackinghtml = file_get_contents("tracking.html");
 
 $src = str_replace("_OPUS_", $opus, $src);
 $src = str_replace("_TITLE_", $info["title"], $src);
@@ -39,6 +40,7 @@ $src = str_replace("_MUSIC-URL_", $info["music-url"], $src);
 $src = str_replace("_SCORE_", $info["score"], $src);
 $src = str_replace("_SCORE-URL_", $info["score-url"], $src);
 $src = str_replace("_CODE_", $info["code"], $src);
+$src = str_replace("_TRACKING_", $trackinghtml, $src);
 
 if ($editor != 1) {
 	$src = delete_all_between("_BEGINEDITOR_", "_ENDEDITOR_", $src);
