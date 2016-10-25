@@ -12,7 +12,7 @@
 <script src="prefixfree.js" type="text/javascript"></script>
 <!-- You can download it from http://leaverou.github.com/prefixfree/ -->
 <script>
-var lensactive = true;
+var lensactive = false;
 $(document).ready(function(){
 
 	var native_width = 0;
@@ -369,9 +369,11 @@ setInterval(function update() {
 		cursor = cursor + 1;
 	}
 	console.log(cursor + " " + lastcursor);
-	if (cursor == lastcursor + 1 && cursor > 0) {
+	if (cursor == lastcursor + 1) {
 		lastcursor = cursor;
-		transission();
+		if (cursor > 1) {
+			transission();
+		}
 	}
 	cursor = cursor - 1;
 	if (($("cursorscore").src != "_OPUS_/media/_OPUS_-" + cursor.toString() + ".png") && (cursor >= 0))  {
