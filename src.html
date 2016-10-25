@@ -355,17 +355,23 @@ _COMPOSER_
 $(document).click(function(event) {
 	logmsg(event.target);
 });
-	
+
+lastcursor = 0;
+
 setInterval(function update() {
 	t = player.getCurrentTime();
 	//console.log(t);
-	
 	$("#indicator").html(recordcursor);
 	
 	//UPDATE SCORE
 	cursor = 0;
 	while (parseInt(trackscore[cursor]) < t) {
 		cursor = cursor + 1;
+	}
+	console.log(cursor + " " + lastcursor);
+	if (cursor > lastcursor) {
+		lastcursor = cursor;
+		transission();
 	}
 	cursor = cursor - 1;
 	if (($("cursorscore").src != "_OPUS_/media/_OPUS_-" + cursor.toString() + ".png") && (cursor >= 0))  {
@@ -380,7 +386,6 @@ setInterval(function update() {
 	else {
 		percent = 100;
 	}
-	console.log(percent);
 	var elem = document.getElementById('progress-bar');
 	var elem2 = document.getElementById('barcontainer');
 	elem.style.width = percent.toString() + "%";
@@ -459,20 +464,9 @@ oImg2.setAttribute('id', "copy2");
 oImg2.setAttribute('class', "copy2");
 oImg2.setAttribute('style', "position: absolute;z-index:102;top:" + Math.floor(newOffset.top) + "px;left:" + Math.floor(newOffset.left) + "px;");
 document.body.appendChild(oImg2);
-/*
 
-$temp
-  .css('position', 'absolute')
-  .css('left', oldOffset.left)
-  .css('top', oldOffset.top)
-  .css('zIndex', 1000);
-$new.hide();
-$old.hide();
-console.log(newOffset.top + " " + newOffset.left);
-console.log(oldOffset.top + " " + oldOffset.left);
-*/
-$("#copy").animate({'left':newOffset.left}, 'slow');
-$("#copy2").animate({'left': -width}, 'slow');
+$("#copy").animate({'left':newOffset.left}, 2500, function () { $("#copy").remove(); });
+$("#copy2").animate({'left': -width}, 2500, function () { $("#copy2").remove();});
 }
 </script>
 
