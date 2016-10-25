@@ -310,7 +310,7 @@ $(document).ready(function() {
 	
 	
 	
-<table id="container" style="vertical-align: top; width: 100%; height:90%; top:0px; left:0px; position:absolute; z-index: 100;" border="0">
+<table id="container" style="vertical-align: top;padding:0px; width: 100%; height:90%; top:0px; left:0px; position:absolute; z-index: 100;" border="0">
 <tr>
 <td width="50%" style="padding:3px">
 <h2 style="display:inline;">_TITLE_ </h2>  
@@ -323,7 +323,7 @@ _COMPOSER_
 <br>
 <a class="button" href="#" onclick="toggle_visibility('divResize');">Toggle player</a>
 <a class="button" href="#" onclick="lensactive = !lensactive;">Toggle lens</a>
-<a class="button" href="#" onclick="transission();">test page transission (unready)</a>
+<a class="button" href="#" onclick="transissionactive = !transissionactive;">Toogle smooth page turn</a>
 </td>
 <td style="padding:10px" width="50%">
 <div style="color:#999999;">
@@ -369,7 +369,7 @@ setInterval(function update() {
 		cursor = cursor + 1;
 	}
 	console.log(cursor + " " + lastcursor);
-	if (cursor > lastcursor) {
+	if (cursor == lastcursor + 1 && cursor > 0) {
 		lastcursor = cursor;
 		transission();
 	}
@@ -435,39 +435,43 @@ setInterval(function update() {
 </script>
 
 <script>
+transissionactive = true;
+
 function transission(){
+if (transissionactive == true) {
 var oold = $('#score2');
-//First we copy the arrow to the new table cell and get the offset to the document
+
 var onew = $('#score');
 var newOffset = onew.offset();
 var height = onew.height();
 var width = onew.width();
 var oldOffset = oold.offset();
 console.log(width + "-" + height + " - " + oldOffset.top + "-" + oldOffset.left);
-//var $temp = $old.clone().appendTo('body');
+topcorr = 8;
+leftcorr = 8;
 var oImg=document.createElement("img");
-oImg.setAttribute('src', "_OPUS_/media/_OPUS_-" + cursor.toString() + ".png");
+oImg.setAttribute('src', "_OPUS_/media/_OPUS_-" + (cursor-1).toString() + ".png");
 oImg.setAttribute('alt', 'na');
 oImg.setAttribute('height', height + "px");
 oImg.setAttribute('width', width+"px");
 oImg.setAttribute('id', "copy");
 oImg.setAttribute('class', "copy");
-oImg.setAttribute('style', "position: absolute;z-index:101;top:" + Math.floor(oldOffset.top) + "px;left:" + Math.floor(oldOffset.left) + "px;");
+oImg.setAttribute('style', "position: absolute;z-index:300;top:" + (oldOffset.top - topcorr) + "px;left:" + (oldOffset.left - leftcorr)+ "px;");
 document.body.appendChild(oImg);
 
 var oImg2=document.createElement("img");
-oImg2.setAttribute('src', "_OPUS_/media/_OPUS_-" + (cursor-1).toString() + ".png");
+oImg2.setAttribute('src', "_OPUS_/media/_OPUS_-" + (cursor-2).toString() + ".png");
 oImg2.setAttribute('alt', 'na');
 oImg2.setAttribute('height', height + "px");
 oImg2.setAttribute('width', width+"px");
 oImg2.setAttribute('id', "copy2");
 oImg2.setAttribute('class', "copy2");
-oImg2.setAttribute('style', "position: absolute;z-index:102;top:" + Math.floor(newOffset.top) + "px;left:" + Math.floor(newOffset.left) + "px;");
+oImg2.setAttribute('style', "position: absolute;z-index:300;top:" + (newOffset.top - topcorr) + "px;left:" + (newOffset.left  - leftcorr)+ "px;");
 document.body.appendChild(oImg2);
 
-$("#copy").animate({'left':newOffset.left}, 2500, function () { $("#copy").remove(); });
+$("#copy").animate({'left':(newOffset.left - leftcorr)}, 2500, function () { $("#copy").remove(); });
 $("#copy2").animate({'left': -width}, 2500, function () { $("#copy2").remove();});
-}
+}}
 </script>
 
 
