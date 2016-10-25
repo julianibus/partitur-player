@@ -12,7 +12,7 @@
 <script src="prefixfree.js" type="text/javascript"></script>
 <!-- You can download it from http://leaverou.github.com/prefixfree/ -->
 <script>
-var islens
+var lensactive = true;
 $(document).ready(function(){
 
 	var native_width = 0;
@@ -21,7 +21,7 @@ $(document).ready(function(){
 	var mousey = 0;
 
 	$(".magnify").mousemove(function(e){
-
+		if (lensactive == true) {
 		if(!native_width && !native_height)
 		{
 
@@ -72,7 +72,7 @@ $(document).ready(function(){
 				$(".large").css({left: px, top: py, backgroundPosition: bgp});
 			}
 		}
-	})
+	}})
 })
 </script>
     <style>
@@ -325,6 +325,7 @@ _COMPOSER_
 </div>
 <br>
 <a class="button" href="#" onclick="toggle_visibility('divResize');">Toggle player</a>
+<a class="button" href="#" onclick="lensactive = !lensactive;">Toggle lens</a>
 </td>
 <td style="padding:10px" width="50%">
 <div style="color:#999999;">
