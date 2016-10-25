@@ -375,6 +375,9 @@ setInterval(function update() {
 			transission();
 		}
 	}
+	else {
+		lastcursor = cursor;
+	}
 	cursor = cursor - 1;
 	if (($("cursorscore").src != "_OPUS_/media/_OPUS_-" + cursor.toString() + ".png") && (cursor >= 0))  {
 		document.getElementById("score").src="_OPUS_/media/_OPUS_-" + cursor.toString() + ".png";
