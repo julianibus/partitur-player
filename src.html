@@ -150,17 +150,14 @@ a.button {
 }
 body {
   font-family: Arial;
+  position: relative;
 }
 html, body
 {
   height: 100%;
 }
 img {
-  display: block;
-  max-width:100%;
-  max-height:100%;
-  width: auto;
-  height: auto;
+
 }
     </style>
 	<script type="text/javascript">
@@ -341,14 +338,14 @@ _COMPOSER_
 <div class="magnify" id="magnify">
 	<div id="large" class="large"></div>
 	<!-- This is the magnifying glass which will contain the original/large version -->
-<img id="score" class="small" src="_OPUS_/media/_OPUS_-0.png" name="edit-save" />
+<img id="score" style="max-width:100%;max-height:100%;width: auto;height: auto;" class="small" src="_OPUS_/media/_OPUS_-0.png" name="edit-save" />
   </div>
 
 </td>
 
 <td id="right" width="50%">
 
-<img id="score2" style="width: 100%; height: 100%;" src="_OPUS_/media/_OPUS_-1.png" name="edit-save"/>
+<img id="score2" style="max-width:100%;max-height:100%;width: auto;height: auto;" src="_OPUS_/media/_OPUS_-1.png" name="edit-save"/>
 
 </td>
 </tr>
@@ -434,17 +431,39 @@ setInterval(function update() {
 
 <script>
 function transission(){
-var oold = $('#right img');
+var oold = $('#score2');
 //First we copy the arrow to the new table cell and get the offset to the document
-var onew = $('#left');
+var onew = $('#score');
 var newOffset = onew.offset();
-
+var height = onew.height();
+var width = onew.width();
 var oldOffset = oold.offset();
-
-var $temp = $old.clone().appendTo('body');
-
-
-
+console.log(width + "-" + height + " - " + oldOffset.top + "-" + oldOffset.left);
+//var $temp = $old.clone().appendTo('body');
+var oImg=document.createElement("img");
+oImg.setAttribute('src', "_OPUS_/media/_OPUS_-" + cursor.toString() + ".png");
+oImg.setAttribute('alt', 'na');
+oImg.setAttribute('height', height + "px");
+oImg.setAttribute('width', width+"px");
+oImg.setAttribute('top', oldOffset.top + "px");
+oImg.setAttribute('left', oldOffset.left + "px");
+oImg.setAttribute('id', "copy");
+oImg.setAttribute('class', "copy");
+oImg.setAttribute('style', "position: absolute;z-index:100000;top:" + Math.floor(oldOffset.top) + "px;left:" + Math.floor(oldOffset.left) + "px;");
+document.body.appendChild(oImg);
+var oImg=document.createElement("img");
+oImg.setAttribute('src', "_OPUS_/media/_OPUS_-" + cursor.toString() + ".png");
+oImg.setAttribute('alt', 'na');
+oImg.setAttribute('height', 10);
+oImg.setAttribute('width', 10);
+oImg.setAttribute('top', 0);
+oImg.setAttribute('left', 0);
+oImg.setAttribute('id', "copy");
+oImg.setAttribute('class', "copy");
+oImg.setAttribute('style', "position: absolute;z-index:100000;");
+document.body.appendChild(oImg);
+}
+/*
 
 $temp
   .css('position', 'absolute')
@@ -462,7 +481,9 @@ $temp.animate( {'top': newOffset.top, 'left':0}, 'slow', function(){ //:newOffse
    $temp.remove();
 });
 }
+*/
 </script>
+
 
 _TRACKING_
 
