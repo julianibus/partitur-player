@@ -115,18 +115,6 @@ $(document).ready(function(){
             float:left 
             z-index: 1000;
             display: 'block';
-		}
-        #settings { 
-            border:dashed 2px #CCC; 
-            width:46%; 
-            height:120px; 
-            padding:5px; 
-            margin:5px; 
-            top: 2%;
-            left: 50%;
-            font:13px Arial; 
-            cursor:move; 
-            float:left 
         } 		
 		table {
 			border:0px solid #CCC;
@@ -228,7 +216,7 @@ $(document).ready(function() {
 	<div id="divResize" style="width:47%; height:45%;z-index: 1000;"><br><div id="player"><br></div></div>
 	
 	<!--_BEGINEDITOR_-->
-	<div id="recordframe"><br>
+	<div id="settings" style="position:absolute;z-index:300; top:0px; left:50%;"><br>
 	<table bgcolor="#00FF00"><tr>
 	<td><input type="button" id="markbtn" value="Mark"></td>
 	<td><div id="indicator">0</div>Cursor</td>
@@ -456,7 +444,7 @@ topcorr = 8;
 leftcorr = 8;
 var oImg=document.createElement("img");
 oImg.setAttribute('src', "_OPUS_/media/_OPUS_-" + (cursor-1).toString() + ".png");
-oImg.setAttribute('alt', 'na');
+oImg.setAttribute('alt', 'Loading...');
 oImg.setAttribute('height', height + "px");
 oImg.setAttribute('width', width+"px");
 oImg.setAttribute('id', "copy");
@@ -466,7 +454,7 @@ document.body.appendChild(oImg);
 
 var oImg2=document.createElement("img");
 oImg2.setAttribute('src', "_OPUS_/media/_OPUS_-" + (cursor-2).toString() + ".png");
-oImg2.setAttribute('alt', 'na');
+oImg2.setAttribute('alt', 'Loading...');
 oImg2.setAttribute('height', height + "px");
 oImg2.setAttribute('width', width+"px");
 oImg2.setAttribute('id', "copy2");
