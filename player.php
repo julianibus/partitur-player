@@ -40,6 +40,8 @@ $src = str_replace("_MUSIC-URL_", $info["music-url"], $src);
 $src = str_replace("_SCORE_", $info["score"], $src);
 $src = str_replace("_SCORE-URL_", $info["score-url"], $src);
 $src = str_replace("_CODE_", $info["code"], $src);
+$src = str_replace("_BEGIN_", $info["begin"], $src);
+$src = str_replace("_END_", $info["end"], $src);
 $src = str_replace("_TRACKING_", $trackinghtml, $src);
 
 if ($editor != 1) {

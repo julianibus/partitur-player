@@ -271,8 +271,13 @@ $(document).ready(function() {
           events: {
             'onReady': onPlayerReady,
             'onStateChange': onPlayerStateChange
-          }
+          },
+		  playerVars: {
+          start: _BEGIN_,
+          end: _END_
+	      }
         });
+        
       }
 
       // 4. The API will call this function when the video player is ready.
@@ -294,6 +299,8 @@ $(document).ready(function() {
       function stopVideo() {
         player.stopVideo();
       }
+      
+
     </script>
 	
 	
@@ -374,6 +381,10 @@ setInterval(function update() {
 	if (cursor + 1 <= trackscore.length - 1) {
 		var duration = trackscore[cursor + 1] - trackscore[cursor];
 		var remaining = trackscore[cursor + 1] - t;
+		if (trackscore[cursor] == 0){
+			var duration = trackscore[cursor + 1] - _BEGIN_ - trackscore[cursor];
+			var remaining = trackscore[cursor + 1] - t;			
+		}
 		var percent = (1 - remaining / parseFloat(duration))*100;
 	}
 	else {
