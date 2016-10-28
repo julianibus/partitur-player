@@ -473,8 +473,19 @@ oImg2.setAttribute('class', "copy2");
 oImg2.setAttribute('style', "position: absolute;z-index:300;top:" + (newOffset.top - topcorr) + "px;left:" + (newOffset.left  - leftcorr)+ "px;");
 document.body.appendChild(oImg2);
 
+var oImg3=document.createElement("img");
+oImg3.setAttribute('src', "_OPUS_/media/_OPUS_-" + (cursor).toString() + ".png");
+oImg3.setAttribute('alt', 'Loading...');
+oImg3.setAttribute('height', height + "px");
+oImg3.setAttribute('width', width+"px");
+oImg3.setAttribute('id', "copy3");
+oImg3.setAttribute('class', "copy3");
+oImg3.setAttribute('style', "position: absolute;z-index:300;top:" + (oldOffset.top - topcorr) + "px;left:" + (oldOffset.left - leftcorr + width)+ "px;");
+document.body.appendChild(oImg3);
+
 $("#copy").animate({'left':(newOffset.left - leftcorr)}, 2500, function () { $("#copy").remove(); });
 $("#copy2").animate({'left': -width}, 2500, function () { $("#copy2").remove();});
+$("#copy3").animate({'left':(oldOffset.left - leftcorr)}, 2500, function () { $("#copy3").remove(); });
 }}
 </script>
 
