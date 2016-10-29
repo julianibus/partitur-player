@@ -15,6 +15,7 @@ function delete_all_between($beginning, $end, $string) {
 $opus = $_GET['opus'];
 $editor = $_GET['editor'];
 
+#Readout info.dat
 $myFile = $opus . "/info.dat";
 $fh = fopen($myFile, 'r');
 $theData = fread($fh, filesize($myFile));
@@ -29,6 +30,7 @@ fclose($fh);
 
 $info = $assoc_array;
 
+#Build page from src.html
 $src = file_get_contents("src.html");
 $trackinghtml = file_get_contents("tracking.html");
 
@@ -39,17 +41,32 @@ $src = str_replace("_MUSIC_", $info["music"], $src);
 $src = str_replace("_MUSIC-URL_", $info["music-url"], $src);
 $src = str_replace("_SCORE_", $info["score"], $src);
 $src = str_replace("_SCORE-URL_", $info["score-url"], $src);
-$src = str_replace("_CODE_", $info["code"], $src);
+$src = str_replace("_CODE_", trim($info["code"]), $src);
 $src = str_replace("_BEGIN_", $info["begin"], $src);
 $src = str_replace("_END_", $info["end"], $src);
-$src = str_replace("_PREVIOUS_", $info["previous"], $src);
-$src = str_replace("_NEXT_", $info["next"], $src);
 $src = str_replace("_TRACKING_", $trackinghtml, $src);
 
+#Editor
 if ($editor != 1) {
 	$src = delete_all_between("_BEGINEDITOR_", "_ENDEDITOR_", $src);
 }
 
+#Menu
+$menuhtml = "";
+$links = explode(";",$info["links"]);
+foreach ($links as $link)
+{
+	$linko = explode(",",$link);
+	$code = $linko[0];
+	$desc = $linko[1];
+	
+	$menuhtml = $menuhtml . "<li><a href='player.php?opus=" . $code . "'>" . $desc . "</a></li>";
+	
+}
+
+$src = str_replace("_MENU_", $menuhtml, $src);
+
+#Output page
 echo $src;
 
 
