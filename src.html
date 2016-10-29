@@ -216,6 +216,9 @@ $(document).ready(function() {
 <body style="height: 100%;">
 <ul>
 <li><a class="active" href="index.html"><b>Repertoire</b></a></li>
+<li><a href="#" onclick="toggle_visibility('divResize');"><img style="width:12px; height:12px; position: relative;" src="player.png"> Toggle player</a></li>
+<li><a href="#" onclick="lensactive = !lensactive;"> <img style="width:12px; height:12px; position: relative;" src="magnify.png"> Toggle lens</a></li>
+<li><a href="#" onclick="transissionactive = !transissionactive;"><img style="width:12px; height:12px; position: relative;" src="page.png"> Toggle smooth page turn</a></li>
   _MENU_
 </ul>
 	
@@ -322,10 +325,7 @@ _COMPOSER_
   <div id="progress-bar" style="background-color:#ff0000;height:3px;transition:300ms linear;">
   </div>
 </div>
-<br>
-<a class="button" href="#" onclick="toggle_visibility('divResize');">Toggle player</a>
-<a class="button" href="#" onclick="lensactive = !lensactive;">Toggle lens</a>
-<a class="button" href="#" onclick="transissionactive = !transissionactive;">Toggle smooth page turn</a>
+
 </td>
 <td style="padding:10px" width="50%">
 <div style="color:#999999;">
