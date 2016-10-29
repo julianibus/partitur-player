@@ -60,7 +60,7 @@ foreach ($links as $link)
 	$code = $linko[0];
 	$desc = $linko[1];
 	
-	$menuhtml = $menuhtml . "<li><a href='player.php?opus=" . $code . "'>" . $desc . "</a></li>";
+	$menuhtml = $menuhtml . "<li><a href='player.php?opus=" . $code . "'><font color='blue'>" . $desc . "</font></a></li>";
 	
 }
 
