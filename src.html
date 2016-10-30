@@ -115,7 +115,7 @@ $(document).ready(function(){
             cursor:move; 
             float:left 
             z-index: 1000;
-            display: 'block';
+            display: block;
         } 		
 		table {
 			border:0px solid #CCC;
@@ -178,14 +178,19 @@ window.onbeforeunload = function (e) {
   logmsg("EXIT");
 };	
 
+var playeractive = true;
 <!--
-    function toggle_visibility(id) {
-       var e = document.getElementById(id);
-       if(e.style.display == 'block')
-          e.style.display = 'none';
-       else
-          e.style.display = 'block';
-    }
+function toggle_visibility(id) {
+	var e = document.getElementById(id);
+	if(e.style.display == 'block') {
+		e.style.display = 'none';
+		playeractive = false;
+	}
+	else {
+		e.style.display = 'block';
+		playeractive = true;
+	}
+}
 //-->
 </script>
 <script>
@@ -216,9 +221,9 @@ $(document).ready(function() {
 <body style="height: 100%;">
 <ul>
 <li><a class="active" href="index.html"><b>Repertoire</b></a></li>
-<li><a href="#" onclick="toggle_visibility('divResize');"><img style="width:12px; height:12px; position: relative;" src="player.png"> Toggle player</a></li>
-<li><a href="#" onclick="lensactive = !lensactive;"> <img style="width:12px; height:12px; position: relative;" src="magnify.png"> Toggle lens</a></li>
-<li><a href="#" onclick="transissionactive = !transissionactive;"><img style="width:12px; height:12px; position: relative;" src="page.png"> Toggle smooth page turn</a></li>
+<li><a href="#" id="playertoggle" onclick="toggle_visibility('divResize');"><img style="width:12px; height:12px; position: relative;" src="player.png"> Toggle player</a></li>
+<li><a href="#" id="magnifytoggle" onclick="lensactive = !lensactive;"> <img style="width:12px; height:12px; position: relative;" src="magnify.png"> Toggle lens</a></li>
+<li><a href="#" id="pagetoggle" onclick="transissionactive = !transissionactive;"><img style="width:12px; height:12px; position: relative;" src="page.png"> Toggle smooth page turn</a></li>
   _MENU_
 </ul>
 	
@@ -374,7 +379,6 @@ setInterval(function update() {
 	while (parseInt(trackscore[cursor]) < t) {
 		cursor = cursor + 1;
 	}
-	console.log(cursor + " " + lastcursor);
 	if (cursor == lastcursor + 1) {
 		lastcursor = cursor;
 		if (cursor > 1) {
@@ -429,8 +433,29 @@ setInterval(function update() {
 	
 	var elem3 = document.getElementById('progress-bar2');
 	var percent2 = ((t - _BEGIN_) / parseFloat(_END_ - _BEGIN_))*100;
-	console.log(percent2);
 	elem3.style.width = percent2.toString() + "%";
+	
+	
+	//update toggle indicators
+	console.log(lensactive);
+	if (lensactive == true) {
+		document.getElementById('magnifytoggle').style.color = 'lightgreen'; 
+	}
+	else { 
+		document.getElementById('magnifytoggle').style.color = 'white'; 
+	}
+	if (transissionactive == true) {
+		document.getElementById('pagetoggle').style.color = 'lightgreen'; 
+	}
+	else { 
+		document.getElementById('pagetoggle').style.color = 'white'; 
+	}
+	if (playeractive == true) {
+		document.getElementById('playertoggle').style.color = 'lightgreen'; 
+	}
+	else { 
+		document.getElementById('playertoggle').style.color = 'white'; 
+	}
 	
 }, 300);
 
