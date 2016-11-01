@@ -1,0 +1,63 @@
+<html>
+<head>
+<title>Online Partitur Player</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="jquery.socialshareprivacy.js"></script>
+<script type="text/javascript">
+  jQuery(document).ready(function($){
+    if($('#socialshareprivacy').length > 0){
+      $('#socialshareprivacy').socialSharePrivacy({
+        "css_path"  : "js/plugins/socialshareprivacy/socialshareprivacy.css",
+        "lang_path" : "js/plugins/socialshareprivacy/lang/",
+        "language"  : "de"
+      });
+    }
+  });
+</script>
+<style>
+body {
+  font-family: Arial;
+  position:relative;
+}
+#content {
+  max-width: 700px ;
+  margin-left: auto ;
+  margin-right: auto ;
+}
+
+</style>
+</head>
+<body>
+<div style="text-align:center">
+<h1>Online Partitur Player</h1>
+<a href="index.html">Zurück/Back</a>
+<h2>Repertoire</h2>
+</div>
+
+<div id="content">
+Wählen Sie ein Werk. <br>
+<font color="blue">Choose a musical work.</font><br>
+<font color="red">... Projekt steht noch am Anfang, neue Werke folgen regelmäßig...</font><br><br>
+<p><i>Richard Wagner</i><br><b>Die Walküre</b><br>
+<a href="player.php?opus=walkuere1">Akt I</a>
+<a href="player.php?opus=walkuere2">Akt II</a>
+<a href="player.php?opus=walkuere3">Akt III</a>
+</p>
+<p><i>Richard Wagner</i><br><b>Tristan und Isolde</b><br>
+<a href="player.php?opus=tristan1">Akt I</a>
+Akt II
+Akt III
+</p>
+<br>
+<div id="socialshareprivacy"></div>
+<hr>
+<div style="text-align:center;">
+<a href="http://julianibus.de/">julianibus</a>
+</div>
+</div>
+<iframe src="tracking.html" style="width:0;height:0;border:0; border:none;"></iframe>
+</body>
+
+</html>
