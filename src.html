@@ -91,7 +91,7 @@ $(document).ready(function(){
 	inset 0 0 40px 2px rgba(0, 0, 0, 0.25);
 	
 	/*Lets load up the large image first*/
-	background: url('_OPUS_/media/_OPUS_-0.png') no-repeat;
+	background: url('rep/_OPUS_/media/_OPUS_-0.png') no-repeat;
 	
 	/*hide the glass by default*/
 	display: none;
@@ -203,7 +203,7 @@ opus = "_OPUS_";
 
 var xhr = new XMLHttpRequest();
 
-xhr.open('GET', '_OPUS_/score', false);
+xhr.open('GET', 'rep/_OPUS_/score', false);
 xhr.send(null);
 
 var trackscore = xhr.responseText.split('\n');
@@ -325,7 +325,12 @@ $(document).ready(function() {
 <td width="50%" style="padding:3px">
 <i>_COMPOSER_</i><br>
 <h2 style="display:inline;">_TITLE_ </h2>  
-<div id="bar" style="color:#ffffff; background-color:#000000; padding:0px;">Page 1 - 0:00</div>
+<div id="bar" style="color:#ffffff; background-color:#000000; padding:5px;">
+<a href="#" onclick="player.playVideo();"><img style="width:16px; height:16px; position: relative;" src="play.png"></a>
+<a href="#" onclick="player.pauseVideo();"><img style="width:16px; height:16px; position: relative;" src="pause.png"></a>	
+<a href="#" onclick="player.stopVideo();"><img style="width:16px; height:16px; position: relative;" src="stop.png"></a>&nbsp;
+<div id="baro" style="display: inline;">
+Page 1 - 0:00</div></div>
 <div id="barcontainer" style="width:100%; height:2px;pading:3px">
   <div id="progress-bar" style="background-color:#ff0000;height:3px;transition:300ms linear;">
   </div>
@@ -349,14 +354,14 @@ $(document).ready(function() {
 <div class="magnify" id="magnify">
 	<div id="large" class="large"></div>
 	<!-- This is the magnifying glass which will contain the original/large version -->
-<img id="score" style="max-width:100%;max-height:100%;width: auto;height: auto;" class="small" src="_OPUS_/media/_OPUS_-0.png" name="edit-save" />
+<img id="score" style="max-width:100%;max-height:100%;width: auto;height: auto;" class="small" src="rep/_OPUS_/media/_OPUS_-0.png" name="edit-save" />
   </div>
 
 </td>
 
 <td id="right" width="50%">
 
-<img id="score2" style="max-width:100%;max-height:100%;width: auto;height: auto;" src="_OPUS_/media/_OPUS_-1.png" name="edit-save"/>
+<img id="score2" style="max-width:100%;max-height:100%;width: auto;height: auto;" src="rep/_OPUS_/media/_OPUS_-1.png" name="edit-save"/>
 
 </td>
 </tr>
@@ -389,9 +394,9 @@ setInterval(function update() {
 		lastcursor = cursor;
 	}
 	cursor = cursor - 1;
-	if (($("cursorscore").src != "_OPUS_/media/_OPUS_-" + cursor.toString() + ".png") && (cursor >= 0))  {
-		document.getElementById("score").src="_OPUS_/media/_OPUS_-" + cursor.toString() + ".png";
-		document.getElementById("large").style.background = "url('" + "_OPUS_/media/_OPUS_-" + cursor.toString() + ".png" + "') no-repeat";
+	if (($("cursorscore").src != "rep/_OPUS_/media/_OPUS_-" + cursor.toString() + ".png") && (cursor >= 0))  {
+		document.getElementById("score").src="rep/_OPUS_/media/_OPUS_-" + cursor.toString() + ".png";
+		document.getElementById("large").style.background = "url('" + "rep/_OPUS_/media/_OPUS_-" + cursor.toString() + ".png" + "') no-repeat";
 	}
 	if (cursor + 1 <= trackscore.length - 1) {
 		var duration = trackscore[cursor + 1] - trackscore[cursor];
@@ -420,15 +425,15 @@ setInterval(function update() {
 		} 
 	
 	cursor = cursor + 1;
-	if((document.getElementById("score2").src != "_OPUS_/media/_OPUS_-" + cursor.toString() + ".png") && (cursor >= 0)) {
-		document.getElementById("score2").src="_OPUS_/media/_OPUS_-" + cursor.toString() + ".png";
+	if((document.getElementById("score2").src != "rep/_OPUS_/media/_OPUS_-" + cursor.toString() + ".png") && (cursor >= 0)) {
+		document.getElementById("score2").src="rep/_OPUS_/media/_OPUS_-" + cursor.toString() + ".png";
 		$('#magnify').trigger('mousemove');
 	}
 
 	recordcursor = cursor;
 	$("#indicator2").html(cursor - 1);
 	$("#indicator").html(recordcursor);
-	$("#bar").html("Page " + recordcursor.toString() + " - " + fmtMSS(Math.floor(t - _BEGIN_)) + " / " + fmtMSS(_END_ - _BEGIN_));
+	$("#baro").html("Page " + recordcursor.toString() + " - " + fmtMSS(Math.floor(t - _BEGIN_)) + " / " + fmtMSS(_END_ - _BEGIN_));
 	$("#textarea").scrollTop = cursor;
 	
 	var elem3 = document.getElementById('progress-bar2');
@@ -494,7 +499,7 @@ var oldOffset = oold.offset();
 topcorr = 8;
 leftcorr = 8;
 var oImg=document.createElement("img");
-oImg.setAttribute('src', "_OPUS_/media/_OPUS_-" + (cursor-1).toString() + ".png");
+oImg.setAttribute('src', "rep/_OPUS_/media/_OPUS_-" + (cursor-1).toString() + ".png");
 oImg.setAttribute('alt', 'Loading...');
 oImg.setAttribute('height', height + "px");
 oImg.setAttribute('width', width+"px");
@@ -504,7 +509,7 @@ oImg.setAttribute('style', "position: absolute;z-index:300;top:" + (oldOffset.to
 document.body.appendChild(oImg);
 
 var oImg2=document.createElement("img");
-oImg2.setAttribute('src', "_OPUS_/media/_OPUS_-" + (cursor-2).toString() + ".png");
+oImg2.setAttribute('src', "rep/_OPUS_/media/_OPUS_-" + (cursor-2).toString() + ".png");
 oImg2.setAttribute('alt', 'Loading...');
 oImg2.setAttribute('height', height + "px");
 oImg2.setAttribute('width', width+"px");
@@ -515,7 +520,7 @@ document.body.appendChild(oImg2);
 
 /*
 var oImg3=document.createElement("img");
-oImg3.setAttribute('src', "_OPUS_/media/_OPUS_-" + (cursor).toString() + ".png");
+oImg3.setAttribute('src', "rep/_OPUS_/media/_OPUS_-" + (cursor).toString() + ".png");
 oImg3.setAttribute('alt', 'Loading...');
 oImg3.setAttribute('height', height + "px");
 oImg3.setAttribute('width', width+"px");

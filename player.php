@@ -16,7 +16,7 @@ $opus = $_GET['opus'];
 $editor = $_GET['editor'];
 
 #Readout info.dat
-$myFile = $opus . "/info.dat";
+$myFile = "rep/" . $opus . "/info.dat";
 $fh = fopen($myFile, 'r');
 $theData = fread($fh, filesize($myFile));
 $assoc_array = array();

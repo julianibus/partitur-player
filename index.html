@@ -32,6 +32,8 @@ body {
 <body>
 <div style="text-align:center">
 <h1>Online Partitur Player</h1>
+<a href="rep.html"><img src="start.png"></a><br><br>
+<a href="rep.html">Repertoire</a>     <a href="#features">Features</a>     <a href="#tech">Tech</a>     <a href="#contribute">Contribute</a>
 </div>
 
 <div id="content">
@@ -49,25 +51,19 @@ Mögliche Einsatzgebiete des Online Partitur Players:
 <p><img src="gb.png"> Audio, video, text and full score - the Online Partitur Player (OPP) allows you to get all aspects of a musical piece at a glance. Its repertoire is constantly being expanded. While watching the recording the full score automatically follows the music making manual page turns unnecessary. You're cordially invited to take part in this open source project!</p></font>
 
 <div id="socialshareprivacy"></div>
+<A NAME="rep">
 
-<h2>Repertoire</h2>
-<font color="red">... Projekt steht noch am Anfang, neue Werke folgen regelmäßig...</font><br>
-<p><i>Richard Wagner</i> <b>Die Walküre</b><br>
-<a href="player.php?opus=walkuere1">Akt I</a>
-<a href="player.php?opus=walkuere2">Akt II</a>
-<a href="player.php?opus=walkuere3">Akt III</a>
-</p>
-<p><i>Richard Wagner</i> <b>Tristan und Isolde</b><br>
-<a href="player.php?opus=tristan1">Akt I</a>
-Akt II
-Akt III
-</p>
-<h2>Features</h2>
+<A NAME="features">
+<h2>Features & Bedienung</h2>
 <p>
 <img src="lens.png" style="width=150px;height:150px;" align="left" hspace="15" vspace="15">Wichtigstes Ziel dieses Tools ist es, das audiovisuelle Erleben eines musikalischen Werks um die erhellende Einsicht in das Notenmaterial zu erweitern. Bisher war es dafür nötig, entweder die Partitur in Papierform zu besitzen und mitzublättern oder umständlicherweise in sperrigen PDF-Dokumenten mitzuscrollen. Für eine ausgewählte, aber wachsende Anzahl von Werken gehören diese Umständlichkeiten der Vergangenheit an. Der Online Partitur Player lässt die Partitur simultan zur Aufnahme mitlaufen und garantiert durch flüssige Animation des Seitenwechsels einen kontinuierlichen Lesefluss (per Schaltfläche deaktivierbar). <br> Musik und Bild sind mithilfe eines Youtube-Videos über den standardmäßigen Youtube-Player eingebunden, der sich auf Wunsch über die Schaltfläche <b>Toggle player</b> verbergen lässt, um ggf. den Blick auf die Partitur zu verbessern. Gleichzeitig dient er mit seiner Zeitleiste as primäres Navigationsinstrument zur Auswahl der Stelle im Stück. Bei Zeitsprüngen blättern die Noten instantan zur eingestellten Position. <br> Damit die beiden angezeigten Notenseiten der Partitur in lesbarer Größe dargestellt werden können, ist ein normaler Desktop-Bildschirm ausreichend. Insbesondere auf kleinen Geräten kann daher die über die Schaltfläche <b>Toggle lens</b> aktivierbare Bildschirmlupe abhelfen und ermöglicht ein lokales Heranzoomen an die Notensysteme.<br>
 <img src="bar.png" align="left" hspace="15" vspace="15">
 Der Hauptindikator ist die in der linken oberen Ecke des Bildschirms positionierte Abspielleiste. Auf ihr finden sich neben der aktuellen Seitenzahl und dem Zeitfortschritt zwei dynamische Balken. Der <font color="red">rote</font> Balken visualisiert die bis zum nächsten Seitenwechsel verbleibende zeit, der <font color="blue">blaue</font> steht für die Position im gesamten Werk.</p>  
+
+<A NAME="tech">
+<h2>Technisches</h2>
 <p>
+
 Der Player ist durch Aufrufen des php-Skripts <code>player.php</code> erreichbar. Diesem muss über GET der Parameter <code>opus</code> übergeben werden, der das abzuspielende Werk angibt. Jedes Werk im Repertoire des Players besitzt hierfür einen eindeutigen Code, der zum II. Akt der Walküre gehörige lautet beispielsweise <code>walkuere2</code>. Um also dieses Werk unter Benutzung des Partitur Players abzuspielen, ist die Adresse <code>http://julianibus.de/partitur/player.php?opus=walkuere2</code> anzuwählen. <br>
 Zur Funktionsweise des Players: Neben der zu PNG-Abbildungen konvertierten Partitur und dem Youtube-Video-Code benötigt das Tool für ein Werk nur eine einzige Datei, die die zu jeder einzelnen Notenseite gehörige Zeitposition im Video enthält. Sie ist so aufgebaut, dass der zur n-ten Seite gehörige Zeitcode in der n-ten Zeile der Datei steht und demzufolge beispielsweise so aussieht:
 <pre>
@@ -83,9 +79,31 @@ Zur Funktionsweise des Players: Neben der zu PNG-Abbildungen konvertierten Parti
 </pre>
 Allein auf Grundlage dieser simplen Daten, die für jedes Werk, das in das Repertoire aufgenommen werden soll, manuell durch Menschenhand angefertigt werden müssen, baut der vollständige funktionale Kern des Tools auf. Der Vorteil dieser Struktur liegt in seiner unübetrefflichen Einfachheit und Kompaktheit, der Nachteil ist die Abhängigkeit des eingespeicherten Werks von dem verwendeten Youtube-Video und die Nichtübetragbarkeit auf andere Aufnahmen.
 </p>
-
+<p>
+Um ein Werk dem Repertoire des Players hinzuzufügen, ist es notwendig
+<ol>
+<li>die Partitur (PDF-Datei) in eine Serie von PNG-Bildern mittlerer Auflösung zu konvertieren, sodass die einzelnen Notenseite in der richtigen Reihenfolge in Dateien mit Namen <code>tristan-0.png</code>, <code>tristan-1.png</code>,<code>tristan-2.png</code> usw. vorliegen. Auf Linux geschieht dies mittels des Befehls <code>convert -density 130 -colorspace RGB PARTITUR.pdf WERK.png</code></li>
+<li>die oben beschriebene Datei mit Namen <b>score</b> anzufertigen, die - passend zur Aufnahme - Timecodes für jede Notenseite enthält.</li>
+<li>eine Konfigurationsdatei <b>info.dat</b> mit Metdadaten zu erstellen, die, am Beispiel des II. Akts der Walküre gezeigt, folgende Form besitzt:
+<pre><code>
+title#Die Walküre III. Akt
+composer#Richard Wagner
+score#Leipzig: C.F. Peters, n.d. (ca.1910). Plate 10170. Editor: Felix Mottl (Public Domain).
+score-url#http://imslp.org/wiki/Die_Walk%C3%BCre,_WWV_86B_%28Wagner,_Richard%29
+music#Youtube, Conductor: Pierre Boulez, Bayreuther Festspiele 1980.
+music-url#https://www.youtube.com/watch?v=SfcEfYN6PjU
+code#SfcEfYN6PjU
+begin#14
+end#3941
+links#walkuere1,I. Akt;walkuere2,II. Akt
+</code></pre>
+und in beliebiger Reihenfolge die Informationen Titel, Komponist, Partiturinfo, Partiturquelle, Aufnahmeinfo, Aufnahmequelle, Youtube-Video-Code, Anfangszeit (Sek.), Endzeit (Sek.) und Verlinkungen zu anderen Werken enthält.
+</li>
+</ol>
+</p>
+<A NAME="contribute">
 <h2>Mitmachen</h2>
-Sie möchten, dass ein Werk Ihrer Wahl in das Repertoire des Online Partitur Players aufgenommen wird, oder gar an der weiteren Programmierung mitwirken? Dann verfassen Sie ein Kommentar und hinterlassen Sie eine Email-Adresse, unter der Sie erreichbar sind.
+Sie möchten, dass ein Werk Ihrer Wahl in das Repertoire des Online Partitur Players aufgenommen wird, oder gar an der weiteren Programmierung mitwirken? Dann verfassen Sie ein Kommentar und hinterlassen Sie eine Email-Adresse, unter der Sie erreichbar sind. Der Quellcode wird <a href="https://github.com/julianibus/partitur-player">hier</a> verwaltet.
 
 <iframe src="/commentor/index.php" frameBorder="0"
 width="100%" height="400" name="commentpostsection">
@@ -95,7 +113,7 @@ width="100%" height="400" name="commentpostsection">
 <a href="http://julianibus.de/">julianibus</a>
 </div>
 </div>
-
+<iframe src="tracking.html" style="width:0;height:0;border:0; border:none;"></iframe>
 </body>
 
 </html>
