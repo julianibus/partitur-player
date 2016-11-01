@@ -2,6 +2,20 @@
 <head>
 <title>Online Partitur Player</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="jquery.socialshareprivacy.js"></script>
+<script type="text/javascript">
+  jQuery(document).ready(function($){
+    if($('#socialshareprivacy').length > 0){
+      $('#socialshareprivacy').socialSharePrivacy({
+        "css_path"  : "js/plugins/socialshareprivacy/socialshareprivacy.css",
+        "lang_path" : "js/plugins/socialshareprivacy/lang/",
+        "language"  : "de"
+      });
+    }
+  });
+</script>
 <style>
 body {
   font-family: Arial;
@@ -17,29 +31,71 @@ body {
 </head>
 <body>
 <div style="text-align:center">
-<h1>Online Partitur Player</h1></div>
-<div id="content">
+<h1>Online Partitur Player</h1>
+</div>
 
+<div id="content">
 <p><img src="de.png"> Ton, Bild, Text und Notenmaterial - der Online Partitur Player (OPP) erlaubt es, alle Aspekte eines großen musikalischen Werks (Opern, Symphonien  etc.) <em>auf einen Bick</em> zu erleben. Sein Repertoire wird ständig erweitert. Synchron zu einer Video-Aufnahme laufen die Seiten der Partitur automatisch mit, ohne dass ein manuelles Umblättern nötig ist. Ob aus Genuss oder zwecks Studium - dieses Tool ermöglicht eine neue Perspektive auf die Musik und erweitert den Blick für Details. Das Projekt ist frei, der Quellcode offen, jede Mitarbeit ist erwünscht!</p>
+<p>
+Mögliche Einsatzgebiete des Online Partitur Players:
+<ul>
+<li>für Lehrer im Schul- und Hochschulunterricht zur Vermittlung von analytischen Vorgehensweisen im Umgang mit Partituren und vielschichtiger Musik.</li>
+<li>für Studenten, Musik- und Theaterwissenschaftler als bequemer Helfer bei der Analyse von Text, Notenmaterial und szenischer Umsetzung.</li>
+<li>für Musikkenner, Begeisterte und Interessierte zur Durchführung persönlicher Studien, zur Erweiterung des musikalischen Horizonts, zum multimedialen und vielschichtigen Genuss von Kunst und Kultur etc. </li>
+</ul>
+</p>
 
 <font color="blue">
 <p><img src="gb.png"> Audio, video, text and full score - the Online Partitur Player (OPP) allows you to get all aspects of a musical piece at a glance. Its repertoire is constantly being expanded. While watching the recording the full score automatically follows the music making manual page turns unnecessary. You're cordially invited to take part in this open source project!</p></font>
 
+<div id="socialshareprivacy"></div>
 
-</div>
-<div align="center">
 <h2>Repertoire</h2>
-<p><i>Richard Wagner</i><br><b>Die Walküre</b><br><br>
-<a href="player.php?opus=walkuere1">Akt I</a><br><br>
-<a href="player.php?opus=walkuere2">Akt II</a><br><br>
-<a href="player.php?opus=walkuere3">Akt III</a><br><br>
+<font color="red">... Projekt steht noch am Anfang, neue Werke folgen regelmäßig...</font><br>
+<p><i>Richard Wagner</i> <b>Die Walküre</b><br>
+<a href="player.php?opus=walkuere1">Akt I</a>
+<a href="player.php?opus=walkuere2">Akt II</a>
+<a href="player.php?opus=walkuere3">Akt III</a>
 </p>
-<p><i>Richard Wagner</i><br><b>Tristan und Isolde</b><br><br>
-Akt I<br><br>
-Akt II<br><br>
+<p><i>Richard Wagner</i> <b>Tristan und Isolde</b><br>
+<a href="player.php?opus=tristan1">Akt I</a>
+Akt II
 Akt III
 </p>
+<h2>Features</h2>
+<p>
+<img src="lens.png" style="width=150px;height:150px;" align="left" hspace="15" vspace="15">Wichtigstes Ziel dieses Tools ist es, das audiovisuelle Erleben eines musikalischen Werks um die erhellende Einsicht in das Notenmaterial zu erweitern. Bisher war es dafür nötig, entweder die Partitur in Papierform zu besitzen und mitzublättern oder umständlicherweise in sperrigen PDF-Dokumenten mitzuscrollen. Für eine ausgewählte, aber wachsende Anzahl von Werken gehören diese Umständlichkeiten der Vergangenheit an. Der Online Partitur Player lässt die Partitur simultan zur Aufnahme mitlaufen und garantiert durch flüssige Animation des Seitenwechsels einen kontinuierlichen Lesefluss (per Schaltfläche deaktivierbar). <br> Musik und Bild sind mithilfe eines Youtube-Videos über den standardmäßigen Youtube-Player eingebunden, der sich auf Wunsch über die Schaltfläche <b>Toggle player</b> verbergen lässt, um ggf. den Blick auf die Partitur zu verbessern. Gleichzeitig dient er mit seiner Zeitleiste as primäres Navigationsinstrument zur Auswahl der Stelle im Stück. Bei Zeitsprüngen blättern die Noten instantan zur eingestellten Position. <br> Damit die beiden angezeigten Notenseiten der Partitur in lesbarer Größe dargestellt werden können, ist ein normaler Desktop-Bildschirm ausreichend. Insbesondere auf kleinen Geräten kann daher die über die Schaltfläche <b>Toggle lens</b> aktivierbare Bildschirmlupe abhelfen und ermöglicht ein lokales Heranzoomen an die Notensysteme.<br>
+<img src="bar.png" align="left" hspace="15" vspace="15">
+Der Hauptindikator ist die in der linken oberen Ecke des Bildschirms positionierte Abspielleiste. Auf ihr finden sich neben der aktuellen Seitenzahl und dem Zeitfortschritt zwei dynamische Balken. Der <font color="red">rote</font> Balken visualisiert die bis zum nächsten Seitenwechsel verbleibende zeit, der <font color="blue">blaue</font> steht für die Position im gesamten Werk.</p>  
+<p>
+Der Player ist durch Aufrufen des php-Skripts <code>player.php</code> erreichbar. Diesem muss über GET der Parameter <code>opus</code> übergeben werden, der das abzuspielende Werk angibt. Jedes Werk im Repertoire des Players besitzt hierfür einen eindeutigen Code, der zum II. Akt der Walküre gehörige lautet beispielsweise <code>walkuere2</code>. Um also dieses Werk unter Benutzung des Partitur Players abzuspielen, ist die Adresse <code>http://julianibus.de/partitur/player.php?opus=walkuere2</code> anzuwählen. <br>
+Zur Funktionsweise des Players: Neben der zu PNG-Abbildungen konvertierten Partitur und dem Youtube-Video-Code benötigt das Tool für ein Werk nur eine einzige Datei, die die zu jeder einzelnen Notenseite gehörige Zeitposition im Video enthält. Sie ist so aufgebaut, dass der zur n-ten Seite gehörige Zeitcode in der n-ten Zeile der Datei steht und demzufolge beispielsweise so aussieht:
+<pre>
+<code>
+0
+211
+307
+377
+423.5
+461
+...
+</code>
+</pre>
+Allein auf Grundlage dieser simplen Daten, die für jedes Werk, das in das Repertoire aufgenommen werden soll, manuell durch Menschenhand angefertigt werden müssen, baut der vollständige funktionale Kern des Tools auf. Der Vorteil dieser Struktur liegt in seiner unübetrefflichen Einfachheit und Kompaktheit, der Nachteil ist die Abhängigkeit des eingespeicherten Werks von dem verwendeten Youtube-Video und die Nichtübetragbarkeit auf andere Aufnahmen.
+</p>
+
+<h2>Mitmachen</h2>
+Sie möchten, dass ein Werk Ihrer Wahl in das Repertoire des Online Partitur Players aufgenommen wird, oder gar an der weiteren Programmierung mitwirken? Dann verfassen Sie ein Kommentar und hinterlassen Sie eine Email-Adresse, unter der Sie erreichbar sind.
+
+<iframe src="/commentor/index.php" frameBorder="0"
+width="100%" height="400" name="commentpostsection">
+</iframe>
+<hr>
+<div style="text-align:center;">
+<a href="http://julianibus.de/">julianibus</a>
 </div>
+</div>
+
 </body>
 
 </html>
