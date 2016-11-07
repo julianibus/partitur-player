@@ -148,6 +148,23 @@ html, body
 img {
 
 }
+
+@keyframes blink {
+  50% {
+    opacity: 0.0;
+    color: #ddddff;
+  }
+}
+@-webkit-keyframes blink {
+  50% {
+    opacity: 0.0;
+    color: #ffffff;
+  }
+}
+.skip {
+  animation: blink 1s step-start 0s infinite;
+  -webkit-animation: blink 1s step-start 0s infinite;
+}
     </style>
 	<script type="text/javascript">
 
@@ -202,11 +219,14 @@ var recordcursor = 0;
 opus = "_OPUS_";
 
 var xhr = new XMLHttpRequest();
-
 xhr.open('GET', 'rep/_OPUS_/score', false);
 xhr.send(null);
-
 var trackscore = xhr.responseText.split('\n');
+
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'rep/_OPUS_/markers', false);
+xhr.send(null);
+var markers = xhr.responseText.split('\n');
 
 $(document).ready(function() {		
 	$("#textarea").html(xhr.responseText);
@@ -220,7 +240,7 @@ $(document).ready(function() {
 
 <body style="height: 100%;">
 <ul>
-<li><a class="active" href="index.html"><b>Repertoire</b></a></li>
+<li><a class="active" href="rep.html"><b>Repertoire</b></a></li>
 <li><a href="#" id="playertoggle" onclick="toggle_visibility('divResize');"><img style="width:12px; height:12px; position: relative;" src="player.png"> Toggle player</a></li>
 <li><a href="#" id="magnifytoggle" onclick="lensactive = !lensactive;"> <img style="width:12px; height:12px; position: relative;" src="magnify.png"> Toggle lens</a></li>
 <li><a href="#" id="pagetoggle" onclick="transissionactive = !transissionactive;"><img style="width:12px; height:12px; position: relative;" src="page.png"> Toggle smooth page turn</a></li>
@@ -317,7 +337,16 @@ $(document).ready(function() {
       
 
     </script>
-	
+
+<script>
+var skiptime = 0;
+ $( document ).ready(function() { 
+      $("#skip").click(function(event) { 
+        player.seekTo(skiptime);
+        event.preventDefault(); 
+      }); 
+ });
+</script>
 	
 	
 <table id="container" style="vertical-align: top;padding:0px; width: 100%; height:90%; top:30px; left:0px; position:absolute; z-index: 100;" border="0">
@@ -330,7 +359,10 @@ $(document).ready(function() {
 <a href="#" onclick="player.pauseVideo();"><img style="width:16px; height:16px; position: relative;" src="pause.png"></a>	
 <a href="#" onclick="player.stopVideo();"><img style="width:16px; height:16px; position: relative;" src="stop.png"></a>&nbsp;
 <div id="baro" style="display: inline;">
-Page 1 - 0:00</div></div>
+Page 1 - 0:00</div>
+<div id="skip" class="skip" style="display: inline; visibility: hidden; color: #ddddff; float: right; cursor: pointer;">
+<b>Skip repetition</b></div>
+</div>
 <div id="barcontainer" style="width:100%; height:2px;pading:3px">
   <div id="progress-bar" style="background-color:#ff0000;height:3px;transition:300ms linear;">
   </div>
@@ -460,6 +492,20 @@ setInterval(function update() {
 	}
 	else { 
 		document.getElementById('playertoggle').style.color = 'white'; 
+	}
+	
+	//Handle Skip Button
+	document.getElementById('skip').style.visibility = 'hidden'; 
+	var index;
+	for (index = 0; index < markers.length; ++index) {
+		skipstart = markers[index].split(",")[0];
+		skipend = markers[index].split(",")[1];
+		
+		if ((t > skipstart) && (t < skipend)) {
+			document.getElementById('skip').style.visibility = 'visible'; 
+			skiptime = skipend;
+			
+		}
 	}
 	
 }, 300);
