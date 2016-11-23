@@ -42,10 +42,17 @@ $src = str_replace("_MUSIC-URL_", $info["music-url"], $src);
 $src = str_replace("_SCORE_", $info["score"], $src);
 $src = str_replace("_SCORE-URL_", $info["score-url"], $src);
 $src = str_replace("_CODE_", trim($info["code"]), $src);
-$src = str_replace("_BEGIN_", $info["begin"], $src);
 $src = str_replace("_END_", $info["end"], $src);
 $src = str_replace("_TRACKING_", $trackinghtml, $src);
+$src = str_replace("_BEGIN_", $info["begin"], $src);
 
+if ( isset( $_GET['t'] ) && !empty( $_GET['t'] ) ) {
+	$timecode = $_GET['t'];
+	$src = str_replace("_BEGINPLAY_", $timecode, $src);
+}
+else {
+	$src = str_replace("_BEGINPLAY_", $info["begin"], $src);	
+}
 #Editor
 if ($editor != 1) {
 	$src = delete_all_between("_BEGINEDITOR_", "_ENDEDITOR_", $src);
