@@ -12,7 +12,20 @@ function delete_all_between($beginning, $end, $string) {
   return str_replace($textToDelete, '', $string);
 }
 
+
 $opus = $_GET['opus'];
+
+if (!file_exists("rep/" . $opus)) {
+  echo file_get_contents("opus_not_found.html");
+  exit();
+}
+
+if ( !(isset( $_GET['opus'] ) && !empty( $_GET['opus'] )) ) {
+  echo file_get_contents("opus_not_found.html");
+  exit();
+}
+
+
 $editor = $_GET['editor'];
 
 #Readout info.dat
