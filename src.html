@@ -242,7 +242,7 @@ $(document).ready(function() {
 <body style="height: 100%;">
 <ul>
 <li><a class="active" href="rep.html"><b>Repertoire</b></a></li>
-<li><a href="#" id="share" onclick="document.getElementById('shareframe').src = 'share.php?opus=_OPUS_&t=' + Math.round(t).toString(); popup('popUpDiv');"><img style="width:12px; height:12px; position: relative;" src="link.png">   Share</a></li>
+<li><a class="sharelink" href="#" id="share" onclick="document.getElementById('shareframe').src = 'share.php?opus=_OPUS_&t=' + Math.round(t).toString(); popup('popUpDiv');"><img style="width:12px; height:12px; position: relative;" src="link.png">   Share</a></li>
 <li><a href="#" id="playertoggle" onclick="toggle_visibility('divResize');"><img style="width:12px; height:12px; position: relative;" src="player.png">   Player</a></li>
 <li><a href="#" id="magnifytoggle" onclick="lensactive = !lensactive;"> <img style="width:12px; height:12px; position: relative;" src="magnify.png">   Magnifier</a></li>
 <li><a href="#" id="pagetoggle" onclick="transissionactive = !transissionactive;"><img style="width:12px; height:12px; position: relative;" src="page.png">   Page turn</a></li>
@@ -385,7 +385,7 @@ Page 1 - 0:00</div>
 </td>
 </tr>
 <tr id="left" height="auto">
-<td width="50%">
+<td width="50%" align="right">
 <!-- Lets make a simple image magnifier -->
 <div class="magnify" id="magnify">
 	<div id="large" class="large"></div>
@@ -395,7 +395,7 @@ Page 1 - 0:00</div>
 
 </td>
 
-<td id="right" width="50%">
+<td id="right" width="50%" align="left">
 
 <img id="score2" style="max-width:100%;max-height:100%;width: auto;height: auto;" src="rep/_OPUS_/media/_OPUS_-1.png" name="edit-save"/>
 
@@ -579,7 +579,7 @@ oImg3.setAttribute('class', "copy3");
 oImg3.setAttribute('style', "position: absolute;z-index:300;overflow: hidden;top:" + (oldOffset.top - topcorr) + "px;left:" + (oldOffset.left - leftcorr + width)+ "px;");
 document.body.appendChild(oImg3);
 */
-$("#copy").animate({'left':(newOffset.left - leftcorr)}, 2450, function () { $("#copy").remove(); });
+$("#copy").animate({'left':(newOffset.left - leftcorr)}, 2500, function () { $("#copy").remove(); });
 $("#copy2").animate({'left': -width}, 2500, function () { $("#copy2").remove();});
 //$("#copy3").animate({'left':(oldOffset.left - leftcorr)}, 2350, function () { $("#copy3").remove(); });
 }}
@@ -588,7 +588,7 @@ $("#copy2").animate({'left': -width}, 2500, function () { $("#copy2").remove();}
 <div id="blanket" style="display:none;"></div>
 <div id="popUpDiv" style="display:none;">
 <iframe scroling="no" id="shareframe" style="width:100%; height:80%; word-wrap: break-word;overflow:hidden;" frameborder="0" src="http://www.google.com">iframe not supported!</iframe> 
-<p align="left"><a href="#" onclick="popup('popUpDiv')" >Close</a></p>
+<a href="#" onclick="popup('popUpDiv')" >Close</a>
 </div>	
 
 _TRACKING_

@@ -11,6 +11,10 @@ li {
     float: left;
 }
 
+.sharelink {
+    float: right;
+}
+
 li a {
     display: block;
     color: white;
@@ -37,7 +41,7 @@ li a {
 	position:absolute;
 	background-color:#ffffff;
 	width:400px;
-	height:400px;
+	height:250px;
 	border:5px solid #000;
 	z-index: 9002;
 }
