@@ -357,7 +357,7 @@ var skiptime = 0;
 <tr>
 <td width="50%" style="padding:3px">
 <i>_COMPOSER_</i><br>
-<h2 style="display:inline;">_TITLE_ </h2>  
+<h3 style="display:inline;">_TITLE_ </h2>  
 <div id="bar" style="color:#ffffff; background-color:#000000; padding:5px;">
 <a href="#" onclick="player.playVideo();"><img style="width:16px; height:16px; position: relative;" src="play.png"></a>
 <a href="#" onclick="player.pauseVideo();"><img style="width:16px; height:16px; position: relative;" src="pause.png"></a>	
@@ -372,8 +372,8 @@ Page 1 - 0:00</div>
   <div id="progress-bar" style="background-color:#ff0000;height:3px;transition:300ms linear;">
   </div>
 </div>
-<div id="barcontainer" style="background-color:#ccccff;width:100%; height:2px;pading:3px">
-  <div id="progress-bar2" style="background-color:#0000ff;height:3px;transition:300ms linear;">
+<div id="barcontainer2" class="tooltips" style="background-color:#ccccff;width:100%; height:6px;pading:3px;cursor: hand;">
+  <div id="progress-bar2" style="background-color:#0000ff;height:6px;transition:300ms linear;">
   </div>
 </div>
 
@@ -593,6 +593,41 @@ $("#copy2").animate({'left': -width}, 2500, function () { $("#copy2").remove();}
 </div>	
 
 _TRACKING_
+
+<script>
+var mpageX;
+//Clickable ProgressBar 2 (blue)
+$('#barcontainer2').click(function (e){
+    var elm = $(this);
+    var mxPos = e.pageX - elm.offset().left;
+	var width = $("#barcontainer2").width();
+    var per = mxPos/parseFloat(width);
+    player.seekTo(per*(_END_ - _BEGIN_) + _BEGIN_);
+});
+
+function n(n){
+    return n > 9 ? "" + n: "0" + n;
+}
+//Tooltip
+$('#barcontainer2').mousemove(function (e){
+	  mpageX = e.pageX;
+	  $( "#barcontainer2" ).tooltip({
+		items: '#barcontainer2',
+		content: function(e) {
+			var elm = $("#barcontainer2");
+			var mxPos = mpageX - elm.offset().left;
+			var width = $("#barcontainer2").width();
+			var per = mxPos/parseFloat(width);
+			var tim = (per*(_END_ - _BEGIN_)); //Without _BEGIN_
+			return Math.floor(tim/parseFloat(60)) + ":" + n(Math.floor(tim%60)); },
+			
+	  });
+});
+
+
+
+
+</script>
 
 </body>
 </html>
