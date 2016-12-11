@@ -6,6 +6,7 @@
     <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"/>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script src="js/jquery.transit.min.js"></script>
     <script type="text/javascript" src="js/css-pop.js"></script>
     <link rel="stylesheet" href="template.css">  
 	<link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
@@ -185,7 +186,7 @@ function logmsg(msg) {
 		dummy = 0;
 	}
     var i = new Image();
-    i.src = 'log.php?msg=' + datetime + "- " + id + " - " + msg + " - " + t.toString();
+    i.src = 'log.php?msg=' + datetime + "- " + id + " - _OPUS_ - " + t.toString() + " - " + msg;
 	
 }	
 	
@@ -246,7 +247,7 @@ var markers = xhr2.responseText.split('\n');
 
 <body style="height: 100%;">
 <ul>
-<li><a class="active" href="rep.html"><b>Repertoire</b></a></li>
+<li><a class="active" href="index.html"><b>Repertoire</b></a></li>
 <li><a class="sharelink" href="#" id="share" onclick="document.getElementById('shareframe').src = 'share.php?opus=_OPUS_&t=' + Math.round(t).toString(); popup('popUpDiv');"><img style="width:12px; height:12px; position: relative;" src="link.png">   Share</a></li>
 <li><a href="#" id="playertoggle" onclick="toggle_visibility('divResize');"><img style="width:12px; height:12px; position: relative;" src="player.png">   Player</a></li>
 <li><a href="#" id="magnifytoggle" onclick="lensactive = !lensactive;"> <img style="width:12px; height:12px; position: relative;" src="magnify.png">   Magnifier</a></li>
@@ -415,9 +416,10 @@ Page 1 - 0:00</div>
 </table>
 
 <script>
+	/*Ü
 $(document).click(function(event) {
 	logmsg(event.target);
-});
+});*/
 
 lastcursor = 0;
 
@@ -549,6 +551,9 @@ setInterval(function update() {
 transissionactive = true;
 
 function transission(){
+
+logmsg(cursor.toString());	
+
 if (transissionactive == true) {
 var oold = $('#score2');
 
@@ -590,8 +595,8 @@ oImg3.setAttribute('class', "copy3");
 oImg3.setAttribute('style', "position: absolute;z-index:300;overflow: hidden;top:" + (oldOffset.top - topcorr) + "px;left:" + (oldOffset.left - leftcorr + width)+ "px;");
 document.body.appendChild(oImg3);
 */
-$("#copy").animate({'left':(newOffset.left - leftcorr)}, 2500, function () { $("#copy").remove(); });
-$("#copy2").animate({'left': -width}, 2500, function () { $("#copy2").remove();});
+$("#copy").transition({'left':(newOffset.left - leftcorr)}, 2150, function () { $("#copy").remove(); });
+$("#copy2").transition({'left': -width}, 2200, function () { $("#copy2").remove();});
 //$("#copy3").animate({'left':(oldOffset.left - leftcorr)}, 2350, function () { $("#copy3").remove(); });
 }}
 </script>
