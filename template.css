@@ -3,8 +3,8 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #333;
-    z-index: 100000;
+    background-color: #585858;
+    z-index: 10000;
 }
 
 li {
@@ -19,7 +19,7 @@ li a {
     display: block;
     color: white;
     text-align: center;
-    padding: 7px 8px;
+    padding: 5px 6px;
     text-decoration: none;
 }
 
@@ -47,3 +47,32 @@ li a {
 }
 
 #popUpDiv a {position:relative; top:20px; left:20px}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+    padding: 3px;
+    font-size: 65%;
+}
+
+.tooltip .tooltiptext {
+    position: fixed;
+    top: 1%;
+    left: 60%;
+    width:200px;
+    visibility: hidden;
+    background-color: black;
+    color: #fff;
+    text-align: left;
+    border-radius: 6px;
+    padding: 5px 2px;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
