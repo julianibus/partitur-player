@@ -187,6 +187,34 @@ img {
     box-shadow: 0 0 15px #000000;
     z-index: 100000;
 }
+#leftbutton {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    padding: 3px;
+    
+    border-radius: 6px;
+	cursor: pointer; cursor: hand;
+    background: rgba(256, 256, 256, .2); 
+    text-align: left;
+    color: #ffffff;
+    box-shadow: 0 0 15px #000000;
+    z-index: 100000;
+}
+#rightbutton {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    padding: 3px;
+    
+    border-radius: 6px;
+	cursor: pointer; cursor: hand;
+    background: rgba(256, 256, 256, .2); 
+    text-align: left;
+    color: #ffffff;
+    box-shadow: 0 0 15px #000000;
+    z-index: 100000;
+}
 #controls:hover {
     opacity: 0.75;
     filter: alpha(opacity=75); /* For IE8 and earlier */
@@ -222,6 +250,8 @@ window.onbeforeunload = function (e) {
 };	
 
 var playeractive = true;
+var syncing = true;
+var trasiting = false;
 <!--
 function toggle_visibility(id) {
 	var e = document.getElementById(id);
@@ -380,13 +410,10 @@ var skiptime = 0;
         player.seekTo(skiptime);
         event.preventDefault(); 
       }); 
- });#footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
+ });
 </script>
-	
+<div id="leftbutton"><img src="left.png" style="width:32px;height:32px;" onclick="previous();"></div>
+<div id="rightbutton"><img src="right.png" style="width:32px;height:32px;" onclick="next();"></div>
 	
 <div id="controls">
 <div style="display:inline"><div class="tooltip"><img style="width:12px; height:12px;" src="info.png">
@@ -408,11 +435,11 @@ LOADING...</div>
 <b>Skip repetition</b></div>
 </div>
 <div id="barcontainer" style="width:100%; height:2px;pading:3px">
-  <div id="progress-bar" style="background-color:#ff0000;height:3px;transition:300ms linear;">
+  <div id="progress-bar" style="background-color:#ff0000;height:5px;transition:300ms linear;">
   </div>
 </div>
 <div id="barcontainer2" class="tooltips" style="background-color:#ccccff;width:100%; height:9px;pading:3px;cursor: hand;">
-  <div id="progress-bar2" style="background-color:#0000ff;height:9px;transition:300ms linear;">
+  <div id="progress-bar2" style="background-color:#0000ff;height:10px;transition:300ms linear;">
   </div>
 </div>
 </div>
@@ -427,14 +454,14 @@ LOADING...</div>
 <div class="magnify" id="magnify">
 	<div id="large" class="large"></div>
 	<!-- This is the magnifying glass which will contain the original/large version -->
-<img id="score" style="max-width:100%;max-height:100%;width: auto;height: auto;" class="small" src="rep/_OPUS_/media/_OPUS_-0.png" name="edit-save" />
+<img id="score" style="max-width:100%;max-height:100%;width: auto;z-index:200;height: auto;" class="small" src="rep/_OPUS_/media/_OPUS_-0.png" name="edit-save" />
   </div>
 
 </td>
 
 <td id="right" width="50%" align="left">
 
-<img id="score2" style="max-width:100%;max-height:100%;width: auto;height: auto;" src="rep/_OPUS_/media/_OPUS_-1.png" name="edit-save"/>
+<img id="score2" style="max-width:100%;max-height:100%;width: auto;z-index:200;height: auto;" src="rep/_OPUS_/media/_OPUS_-1.png" name="edit-save"/>
 
 </td>
 </tr>
@@ -596,7 +623,7 @@ oImg.setAttribute('height', height + "px");
 oImg.setAttribute('width', width+"px");
 oImg.setAttribute('id', "copy");
 oImg.setAttribute('class', "copy");
-oImg.setAttribute('style', "position: absolute;z-index:300;top:" + (oldOffset.top - topcorr) + "px;left:" + (oldOffset.left - leftcorr)+ "px;");
+oImg.setAttribute('style', "position: absolute;z-index:600;top:" + (oldOffset.top - topcorr) + "px;left:" + (oldOffset.left - leftcorr)+ "px;");
 document.body.appendChild(oImg);
 
 var oImg2=document.createElement("img");
@@ -606,7 +633,7 @@ oImg2.setAttribute('height', height + "px");
 oImg2.setAttribute('width', width+"px");
 oImg2.setAttribute('id', "copy2");
 oImg2.setAttribute('class', "copy2");
-oImg2.setAttribute('style', "position: absolute;z-index:300;top:" + (newOffset.top - topcorr) + "px;left:" + (newOffset.left  - leftcorr)+ "px;");
+oImg2.setAttribute('style', "position: absolute;z-index:600;top:" + (newOffset.top - topcorr) + "px;left:" + (newOffset.left  - leftcorr)+ "px;");
 document.body.appendChild(oImg2);
 
 /*
@@ -664,7 +691,26 @@ $('#barcontainer2').mousemove(function (e){
 	  });
 });
 
+</script>
 
+<script>
+function previous() {
+	$("#copy").remove();
+	$("#copy2").remove();
+	if (syncing == true){
+		player.seekTo(trackscore[cursor - 2]);
+	}
+	
+}
+
+function next() {
+	$("#copy").remove();
+	$("#copy2").remove();
+	if (syncing == true){
+		player.seekTo(trackscore[cursor]);
+	}	
+	
+}
 
 
 </script>
