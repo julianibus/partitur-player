@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="template.css">  
 	<link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
 	<meta name="author" content="Julian Wienand" />
+	<meta name="description" content="Interaktive Partitur für _TITLE_ von _COMPOSER_ mit Musik, Bild und Text auf einen Blick." />
 
 
 <script src="prefixfree.js" type="text/javascript"></script>
@@ -50,7 +51,7 @@ $(document).ready(function(){
 				var mx = mousex - magnify_offset.left;
 				var my = mousey - magnify_offset.top;				
 			}
-			console.log(mx + " ---- " + my + "- " + e.pageX + " ---- " + e.pageY);
+			//console.log(mx + " ---- " + my + "- " + e.pageX + " ---- " + e.pageY);
 
 
 			if(mx < $(this).width() && my < $(this).height() && mx > 0 && my > 0)
@@ -178,7 +179,7 @@ img {
     left: 60%;
     width:39%;
     padding: 3px;
-    
+    opacity: 0.9;
     border-radius: 6px;
 
     background: #2E2E2E;
@@ -216,7 +217,7 @@ img {
     z-index: 100000;
 }
 #controls:hover {
-    opacity: 0.75;
+    opacity: 1;
     filter: alpha(opacity=75); /* For IE8 and earlier */
 }
     </style>
@@ -229,15 +230,8 @@ function logmsg(msg) {
 	var currentdate = new Date(); 
 	var utc = new Date().toJSON().slice(0,10);
 	var datetime = utc + " @ "  + currentdate.getHours() + ":"  + currentdate.getMinutes() + ":" + currentdate.getSeconds();
-	t = "?"
-	try {
-		t = player.getCurrentTime();
-	}
-	catch(err) {
-		dummy = 0;
-	}
     var i = new Image();
-    i.src = 'log.php?msg=' + datetime + "- " + id + " - _OPUS_ - " + t.toString() + " - " + msg;
+    i.src = 'log.php?msg=' + datetime + "- " + id + " - _OPUS_ - " + " - " + msg;
 	
 }	
 	
@@ -251,7 +245,7 @@ window.onbeforeunload = function (e) {
 
 var playeractive = true;
 var syncing = true;
-var trasiting = false;
+var t = _BEGIN_;
 <!--
 function toggle_visibility(id) {
 	var e = document.getElementById(id);
@@ -300,7 +294,7 @@ var markers = xhr2.responseText.split('\n');
 
 <body style="height: 100%;">
 <ul>
-<li><a class="active" href="index.html"><b>Repertoire</b></a></li>
+<li><a class="active" href="index.html"><b>Online Partitur Player</b></a></li>
 <li><a class="sharelink" href="#" id="share" onclick="document.getElementById('shareframe').src = 'share.php?opus=_OPUS_&t=' + Math.round(t).toString(); popup('popUpDiv');"><img style="width:12px; height:12px; position: relative;" src="link.png">   Share</a></li>
 <li><a href="#" id="playertoggle" onclick="toggle_visibility('divResize');"><img style="width:12px; height:12px; position: relative;" src="player.png">   Player</a></li>
 <li><a href="#" id="magnifytoggle" onclick="lensactive = !lensactive;"> <img style="width:12px; height:12px; position: relative;" src="magnify.png">   Magnifier</a></li>
@@ -312,7 +306,7 @@ var markers = xhr2.responseText.split('\n');
 	<div id="divResize" style="width:47%; height:45%;z-index: 1000;"><br><div id="player"><br></div></div>
 	
 	<!--_BEGINEDITOR_-->
-	<div id="settings" style="position:absolute;z-index:300; top:0px; left:50%;"><br>
+	<div id="settings" style="position:absolute;z-index:3000; top:10%; left:55%;"><br>
 	<table bgcolor="#00FF00"><tr>
 	<td><input type="button" id="markbtn" value="Mark"></td>
 	<td><div id="indicator">0</div>Cursor</td>
@@ -424,6 +418,8 @@ var skiptime = 0;
 <h3 style="display:inline;">_TITLE_ </h2>  <i>_COMPOSER_</i>
 </div>
 
+<div id="synccontrol" style="float:right;cursor:pointer;color:lightgreen;font-weight: bold;" onclick="togglesync();">SYNC</div>
+
 <div id="bar" style="color:#ffffff; background-color:#000000; padding:3px;border-radius: 6px;">
 <a href="#" onclick="player.playVideo();"><img style="width:16px; height:16px; position: relative;" src="play.png"></a>
 <a href="#" onclick="player.pauseVideo();"><img style="width:16px; height:16px; position: relative;" src="pause.png"></a>	
@@ -476,8 +472,12 @@ $(document).click(function(event) {
 lastcursor = 0;
 
 setInterval(function update() {
-	t = player.getCurrentTime();
-	//console.log(t);
+	if (syncing == true) {
+		t = player.getCurrentTime();
+	}
+	else {
+		t = t;
+	}
 	$("#indicator").html(recordcursor);
 	
 	//UPDATE SCORE
@@ -494,8 +494,10 @@ setInterval(function update() {
 	else {
 		lastcursor = cursor;
 	}
+	//console.log(t, cursor);
 	cursor = cursor - 1;
-	if (($("cursorscore").src != "rep/_OPUS_/media/_OPUS_-" + cursor.toString() + ".png") && (cursor >= 0))  {
+	//console.log(document.getElementById("score2").src, "rep/_OPUS_/media/_OPUS_-" + cursor.toString() + ".png", cursor);
+	if ((document.getElementById("score").src != "rep/_OPUS_/media/_OPUS_-" + cursor.toString() + ".png") && (cursor >= 0))  {
 		document.getElementById("score").src="rep/_OPUS_/media/_OPUS_-" + cursor.toString() + ".png";
 		document.getElementById("large").style.background = "url('" + "rep/_OPUS_/media/_OPUS_-" + cursor.toString() + ".png" + "') no-repeat";
 	}
@@ -543,7 +545,7 @@ setInterval(function update() {
 	
 	
 	//update toggle indicators
-	console.log(lensactive);
+	//console.log(lensactive);
 	if (lensactive == true) {
 		document.getElementById('magnifytoggle').style.color = 'lightgreen'; 
 	}
@@ -603,7 +605,8 @@ setInterval(function update() {
 transissionactive = true;
 
 function transission(){
-
+$("#copy").remove();
+$("#copy2").remove();
 logmsg(cursor.toString());	
 
 if (transissionactive == true) {
@@ -647,8 +650,11 @@ oImg3.setAttribute('class', "copy3");
 oImg3.setAttribute('style', "position: absolute;z-index:300;overflow: hidden;top:" + (oldOffset.top - topcorr) + "px;left:" + (oldOffset.left - leftcorr + width)+ "px;");
 document.body.appendChild(oImg3);
 */
+if (syncing == true){
+
 $("#copy").transition({'left':(newOffset.left - leftcorr)}, 2450, function () { $("#copy").remove(); },'linear');
 $("#copy2").transition({'left': -width}, 2500, function () { $("#copy2").remove();},'linear');
+}
 //$("#copy3").animate({'left':(oldOffset.left - leftcorr)}, 2350, function () { $("#copy3").remove(); });
 }}
 </script>
@@ -669,7 +675,13 @@ $('#barcontainer2').click(function (e){
     var mxPos = e.pageX - elm.offset().left;
 	var width = $("#barcontainer2").width();
     var per = mxPos/parseFloat(width);
-    player.seekTo(per*(_END_ - _BEGIN_) + _BEGIN_);
+    if (syncing == true) {
+		player.seekTo(per*(_END_ - _BEGIN_) + _BEGIN_);
+		t = player.getCurrentTime();
+	}
+	else {
+		t = per*(_END_ - _BEGIN_) + _BEGIN_;
+	}
 });
 
 function n(n){
@@ -700,6 +712,9 @@ function previous() {
 	if (syncing == true){
 		player.seekTo(trackscore[cursor - 2]);
 	}
+	else {
+		t = trackscore[cursor - 2];
+	}
 	
 }
 
@@ -709,9 +724,26 @@ function next() {
 	if (syncing == true){
 		player.seekTo(trackscore[cursor]);
 	}	
+	else{
+		t = trackscore[cursor];
+	}
 	
 }
 
+function togglesync()
+{
+  if(document.getElementById("synccontrol").innerHTML=="SYNC"){
+   document.getElementById("synccontrol").innerHTML="OFF";
+   document.getElementById("synccontrol").style.color="red";
+   syncing = false;
+}
+  else if(document.getElementById("synccontrol").innerHTML=="OFF"){
+   document.getElementById("synccontrol").innerHTML="SYNC";
+   document.getElementById("synccontrol").style.color="lightgreen";
+   syncing = true;
+  // t = player.getCurrentTime();
+	}
+}
 
 </script>
 </body>

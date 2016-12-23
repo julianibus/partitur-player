@@ -1,10 +1,12 @@
 <html>
 <head>
 <title>Online Partitur Player</title>
+<meta name="author" content="Julian Wienand">
+<meta name="description" content="Musik, Bild, Text und Notenmaterial - der Online Partitur Player erlaubt es, alle Aspekte eines großen musikalischen Werks (Opern, Sinfonien  etc.) auf einen Bick zu erleben.">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"/>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<meta id="meta" name="viewport" content="width=device-width; initial-scale=0.8" />
 <link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
+<link rel="stylesheet" href="style.css">
 <script type="text/javascript" src="jquery.socialshareprivacy.js"></script>
 <script type="text/javascript">
   jQuery(document).ready(function($){
@@ -17,67 +19,165 @@
     }
   });
 </script>
-<style>
-body {
-  font-family: Arial;
-  position:relative;
-}
-#content {
-  max-width: 700px ;
-  margin-left: auto ;
-  margin-right: auto ;
-}
 
-</style>
 </head>
 <body>
-<div style="text-align:center">
-<h1>Online Partitur Player</h1>
-<br>
+	
+<div class="titlebar">
+<div style="margin:0 auto;">
+Online Partitur Player
+</div>
+</div>
+
+<div id="content">
+<div>
+<img style="float:left;display:inline;margin:30px;width:110px; height:110px;" src="res/logo.png">
+
+<p lang="de">
+Musik, Video, Text und Notenmaterial - der Online Partitur Player erlaubt es,
+alle Aspekte eines großen musikalischen Werks (Opern, Sinfonien etc.) auf einen Bick zu erleben.</p>
+
+<p lang="fr"><font color="blue">
+Music, video, text and full score - the Online Partitur Player allows you to get all aspects of a musical composition at a glance.</p>
+<p></font>
 <p>
 Wählen Sie ein Werk. <br>
-<font color="blue">Choose a musical work.</font><br>
-<font color="red">... Projekt steht noch am Anfang, neue Werke folgen regelmäßig...</font><br><br></p>
+<font color="blue">Choose a composition.</font><br>
+Beispiel: <a class="scene" href="http://partitur.org/player.php?opus=walkuere1&t=3546&flag=ex">Siegmund heiß ich, Die Walküre I. Akt</a> (<i>Richard Wagner</i>)</p>
+<p style="border-width: 1px; border-style:solid; border-color:red; padding:2px">
+<font color="red">
+Dieses Projekt befindet sich im Aufbau. Neue Werke folgen regelmäßig. <a href="https://www.facebook.com/partiturplayer">Like the FB page for updates</a>.
+</font>
+</p>
 </div>
-<div id="content">
-<p><i>Richard Wagner</i><br><b>Das Rheingold</b><br>
-<a href="/rheingold1">1. Szene</a>
-<a href="/rheingold2">2. Szene</a>
-<a href="/rheingold3">3. Szene</a>
-4. Szene
+	
+<h4 class="decorated"><span>Richard Wagner (1813 - 1883)</span></h4>
+
+	
+<div class="box">
+<h4>Der Ring des Nibelungen</h4>
+
+<p>
+<table cellpadding="5">
+<tr>
+<td><img src="res/money.png"></td><td>
+<p><b>Das Rheingold</b><br>
+<a class="work" href="/rheingold">Ganzes Werk</a>
+</p>
+</td>
+</tr>
+<tr>
+<td><img src="res/helmet.png"></td><td>
+<p><b>Die Walküre</b><br>
+<a class="work" href="/walkuere1">Akt I</a>
+<a class="work" href="/walkuere2">Akt II</a>
+<a class="work" href="/walkuere3">Akt III</a>
+</p>
+</td>
+</tr>
+<tr>
+<td><img src="res/sword.png"></td><td>
+<p><b>Siegfried</b><br>
+<a class="work" href="/siegfried1">Akt I</a>
+<a class="work" href="/siegfried2">Akt II</a>
+<a class="work" href="/siegfried3">Akt III</a>
+</p>
+</td>
+</tr>
+<tr>
+<td><img src="res/fire.png"></td><td>
+<p><b>Götterdämmerung</b><br>
+<a class="work" href="/goetterdaemmerung0">Prolog</a>
+<a class="work" href="/goetterdaemmerung1">Akt I</a>
+<a class="work" href="/goetterdaemmerung2">Akt II</a>
+<a class="work" href="/goetterdaemmerung3">Akt III</a>
+</p>
+</td>
+</tr>
+</table>
+</p>
+</div>	
+
+<p><b>Tristan und Isolde</b><br>
+<a class="work" href="/tristan1">Akt I</a>
+<a class="work" href="/tristan2">Akt II</a>
+Akt III
 </p>
 
-<p><b>Die Walküre</b><br>
-<a href="/walkuere1">Akt I</a>
-<a href="/walkuere2">Akt II</a>
-<a href="/walkuere3">Akt III</a>
+<h4 class="decorated"><span>Franz Schubert (1797 - 1828)</span></h4>
+<p><b>Sinfonie Nr. 9</b><br>
+<a class="work" href="/schubertsym9">Ganzes Werk</a>
 </p>
-<p><b>Siegfried</b><br>
-<a href="/siegfried1">Akt I</a>
-<a href="/siegfried2">Akt II</a>
-<a href="/siegfried3">Akt III</a>
+
+<h4 class="decorated"><span>Max Reger (1873 - 1916)</span></h4>
+
+<p><b>Variationen und Fuge über ein Thema von Mozart (Op. 132)</b><br>
+<a class="work" href="/regervarmozart">Ganzes Werk</a>
 </p>
-<p><b>Götterdämmerung</b><br>
-<a href="/goetterdaemmerung0">Prolog</a>
-Akt I
-Akt II
-Akt III
-</p>
-<p><b>Tristan und Isolde</b><br>
-<a href="/tristan1">Akt I</a>
-<a href="/tristan2">Akt II</a>
-Akt III
-</p>
+
 <br>
-<p><i>Franz Schubert</i><br><b>Sinfonie Nr. 9</b><br>
-<a href="/schubertsym9">Ganzes Werk</a>
-</p>
 <br>
-<div id="socialshareprivacy"></div>
-<hr>
+<br>
+</div>
+<div class="footerbar">
+<br>
 <div style="text-align:center;">
-Powered by the open source project <a href="about.html">Online Partitur Player</a>.<br>
-<a href="http://julianibus.de/">julianibus</a>
+<!-- Sharingbutton Facebook -->
+<a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=http%3A%2F%2Fpartitur.org%2F" target="_blank" aria-label="">
+  <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solidcircle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0C5.38 0 0 5.38 0 12s5.38 12 12 12 12-5.38 12-12S18.62 0 12 0zm3.6 11.5h-2.1v7h-3v-7h-2v-2h2V8.34c0-1.1.35-2.82 2.65-2.82h2.35v2.3h-1.4c-.25 0-.6.13-.6.66V9.5h2.34l-.24 2z"/></svg>
+    </div>
+  </div>
+</a>
+
+<!-- Sharingbutton Twitter -->
+<a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?text=Interactive%20full%20score%20with%20music%2C%20video%20and%20text%20at%20a%20glance!&amp;url=http%3A%2F%2Fpartitur.org%2F" target="_blank" aria-label="">
+  <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solidcircle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0C5.38 0 0 5.38 0 12s5.38 12 12 12 12-5.38 12-12S18.62 0 12 0zm5.26 9.38v.34c0 3.48-2.64 7.5-7.48 7.5-1.48 0-2.87-.44-4.03-1.2 1.37.17 2.77-.2 3.9-1.08-1.16-.02-2.13-.78-2.46-1.83.38.1.8.07 1.17-.03-1.2-.24-2.1-1.3-2.1-2.58v-.05c.35.2.75.32 1.18.33-.7-.47-1.17-1.28-1.17-2.2 0-.47.13-.92.36-1.3C7.94 8.85 9.88 9.9 12.06 10c-.04-.2-.06-.4-.06-.6 0-1.46 1.18-2.63 2.63-2.63.76 0 1.44.3 1.92.82.6-.12 1.95-.27 1.95-.27-.35.53-.72 1.66-1.24 2.04z"/></svg>
+    </div>
+  </div>
+</a>
+
+<!-- Sharingbutton Google+ -->
+<a class="resp-sharing-button__link" href="https://plus.google.com/share?url=http%3A%2F%2Fpartitur.org%2F" target="_blank" aria-label="">
+  <div class="resp-sharing-button resp-sharing-button--google resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solidcircle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.65 8.6c-.02-.66-.3-1.3-.8-1.8S10.67 6 9.98 6c-.63 0-1.2.25-1.64.68-.45.44-.68 1.05-.66 1.7.02.68.3 1.32.8 1.8.96.97 2.6 1.04 3.5.14.45-.45.7-1.05.67-1.7zm-2.5 5.63c-2.14 0-3.96.95-3.96 2.1 0 1.12 1.8 2.08 3.94 2.08s3.98-.93 3.98-2.06c0-1.14-1.82-2.1-3.98-2.1z"/><path d="M12 0C5.38 0 0 5.38 0 12s5.38 12 12 12 12-5.38 12-12S18.62 0 12 0zm-1.84 19.4c-2.8 0-4.97-1.35-4.97-3.08s2.15-3.1 4.94-3.1c.84 0 1.6.14 2.28.36-.57-.4-1.25-.86-1.3-1.7-.26.06-.52.1-.8.1-.95 0-1.87-.38-2.57-1.08-.67-.68-1.06-1.55-1.1-2.48-.02-.94.32-1.8.96-2.45.65-.63 1.5-.93 2.4-.92V5h3.95v1h-1.53l.12.1c.67.67 1.06 1.55 1.1 2.48.02.93-.32 1.8-.97 2.45-.16.15-.33.3-.5.4-.2.6.05.8.83 1.33.9.6 2.1 1.42 2.1 3.56 0 1.73-2.17 3.1-4.96 3.1zM20 10h-2v2h-1v-2h-2V9h2V7h1v2h2v1z"/></svg>
+    </div>
+  </div>
+</a>
+
+<!-- Sharingbutton Tumblr -->
+<a class="resp-sharing-button__link" href="https://www.tumblr.com/widgets/share/tool?posttype=link&amp;title=Interactive%20full%20score%20with%20music%2C%20video%20and%20text%20at%20a%20glance!&amp;caption=Interactive%20full%20score%20with%20music%2C%20video%20and%20text%20at%20a%20glance!&amp;content=http%3A%2F%2Fpartitur.org%2F&amp;canonicalUrl=http%3A%2F%2Fpartitur.org%2F&amp;shareSource=tumblr_share_button" target="_blank" aria-label="">
+  <div class="resp-sharing-button resp-sharing-button--tumblr resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solidcircle">
+    <svg version="1.1" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+        <path d="M12,0C5.383,0,0,5.383,0,12s5.383,12,12,12s12-5.383,12-12S18.617,0,12,0z M15.492,17.616C11.401,19.544,9.5,17,9.5,14.031 V9.5h-2V8.142c0.549-0.178,1.236-0.435,1.627-0.768c0.393-0.334,0.707-0.733,0.943-1.2c0.238-0.467,0.401-0.954,0.49-1.675H12.5v3h2 v2h-2v3.719c0,2.468,1.484,2.692,2.992,1.701V17.616z"/>
+     </svg>
+    </div>
+  </div>
+</a>
+
+<!-- Sharingbutton E-Mail -->
+<a class="resp-sharing-button__link" href="mailto:?subject=Interactive%20full%20score%20with%20music%2C%20video%20and%20text%20at%20a%20glance!&amp;body=http%3A%2F%2Fpartitur.org%2F" target="_self" aria-label="">
+  <div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solidcircle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0C5.38 0 0 5.38 0 12s5.38 12 12 12 12-5.38 12-12S18.62 0 12 0zm8 16c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V8c0-1.1.9-2 2-2h12c1.1 0 2 .9 2 2v8z"/><path d="M17.9 8.18c-.2-.2-.5-.24-.72-.07L12 12.38 6.82 8.1c-.22-.16-.53-.13-.7.08s-.15.53.06.7l3.62 2.97-3.57 2.23c-.23.14-.3.45-.15.7.1.14.25.22.42.22.1 0 .18-.02.27-.08l3.85-2.4 1.06.87c.1.04.2.1.32.1s.23-.06.32-.1l1.06-.9 3.86 2.4c.08.06.17.1.26.1.17 0 .33-.1.42-.25.15-.24.08-.55-.15-.7l-3.57-2.22 3.62-2.96c.2-.2.24-.5.07-.72z"/></svg>
+    </div>
+  </div>
+</a>
+
+
+
+<br><br>
+Online Partitur Player is a non-profit open source project and aims to serve the collective good.<br>
+Feedbacks and feature requests are welcome and should be adressed to <img style="vertical-align:middle;" src="res/email.png">.
+<br>
+<br>
+<a class="linkbox"  href="http://julianibus.de/">julianibus</a>
+<br>
+<font color="grey">Pictograms designed by Freepik and Icomoon from Flaticon. No copyright infringement intended.</font>
+<br>
+<br>
+<br>
+<br>
 </div>
 </div>
 <iframe src="tracking.html" style="width:0;height:0;border:0; border:none;"></iframe>

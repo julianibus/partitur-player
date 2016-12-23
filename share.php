@@ -3,7 +3,7 @@
 $opus = $_GET['opus'];
 $t = $_GET['t'];
 
-$shareurl = "http://www.julianibus.de/partitur/player.php?opus=" . $opus . "&t=" . $t . "&flag=share#";
+$shareurl = "http://partitur.org/" . $opus . "&t=" . $t . "&flag=share#";
 
 ?>
 
