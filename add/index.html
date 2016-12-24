@@ -5,19 +5,35 @@
 <title>Add a composition to the repertoire - Online Partitur Player</title>
 <link rel="stylesheet" type="text/css" href="view.css" media="all">
 <script type="text/javascript" src="view.js"></script>
+<script>
+function dimOff()
+{
+    document.getElementById("darkLayer").style.display = "none";
+    document.getElementById("msg").style.display = "inline";
+}
 
+function dimOn()
+{
+    document.getElementById("darkLayer").style.display = "inline";
+    document.getElementById("msg").style.display = "none";
+}
+
+
+
+</script>
 </head>
 <body id="main_body" >
-	
-	<img id="top" src="top.png" alt="">
+	<div id="darkLayer" class="darkClass" style="display:inline">
 	<div id="form_container">
-	
-		<h1><a>Add a composition to the repertoire</a></h1>
-		<form id="form_1359" class="appnitro" method="post" action="add.php" enctype="multipart/form-data">
-					<div class="form_description">
-			<h2>Add a composition to the repertoire</h2>
-			<p>At first you need to fill out this form. Afterwards you will have access to an editor for syncing video and full score.</p>
-		</div>						
+		<form id="form" onsubmit="return validateForm()" class="appnitro" method="post" action="add.php">
+			<table cellpadding="10px">
+			<tr>
+				<td>
+			<div class="pa" style=""><img style="width:80px;height:80px;" src="../favicon.ico"></div></td><td>
+			<div class="pa" style=""><h2>Add a composition to the repertoire</h2>
+			<p>At first you need to fill out this form. Afterwards you will have access to an editor for syncing video and full score.</p></div>
+			</td></tr></table>	
+			<b><div id="errmsg0" style="color:red;margin:10px"></div></b>	
 			<ul >
 			
 					<li id="li_1" >
@@ -34,7 +50,7 @@
 		<label class="description" for="element_3">YouTube code </label>
 		<div>
 			<input id="ytcode" name="ytcode" class="element text medium" type="text" maxlength="255" value=""/> 
-		</div><p class="guidelines" id="guide_3"><small>Code of the corresponding YouTube-Video
+		</div><p class="guidelines" id="guide_3"><small>Code of the corresponding YouTube video
 Example: For https://www.youtube.com/watch?v=4tC41KK0RBM the code would be 4tC41KK0RBM</small></p> 
 		</li>		<li id="li_5" >
 		<label class="description" for="element_5">Time of beginning (seconds) </label>
@@ -47,17 +63,13 @@ Example: For https://www.youtube.com/watch?v=4tC41KK0RBM the code would be 4tC41
 			<input id="end" name="end" class="element text medium" type="text" maxlength="255" value=""/> 
 		</div><p class="guidelines" id="guide_6"><small>After how many seconds does the composition end in the YouTube video?</small></p> 
 		</li>		<li id="li_4" >
-		<label class="description" for="element_4">Partitur / Full Score as PDF (must be Public Domain) </label>
+		<label class="description" for="element_4">Direct URL of the partitur / full Score as PDF (must be public domain)</label>
 		<div>
 			<input id="score" name="score" class="element text medium" type="text"/> 
 		</div> <p class="guidelines" id="guide_4"><small>Please use full scores taken from http://imslp.org/ 
-They MUST be public domain!</small></p> 
-		</li>		<li id="li_7" >
-		<label class="description" for="element_7">Where did you get this full score from? </label>
-		<div>
-			<input id="source" name="source" class="element text medium" type="text" maxlength="255" value=""/> 
-		</div><p class="guidelines" id="guide_7"><small>Please provide an URL or any other useful information.</small></p> 
-		</li>		<li id="li_8" >
+They MUST be public domain! Copy the direct URL which ends with ".pdf".</small></p> 
+		</li>
+				<li id="li_8" >
 		<label class="description" for="element_8">What's your name? </label>
 		<div>
 			<input id="name" name="name" class="element text medium" type="text" maxlength="255" value=""/> 
@@ -70,12 +82,12 @@ They MUST be public domain!</small></p>
 		</li>		<li id="li_10" >
 		<label class="description" for="element_10">Check again </label>
 		<span>
-			<input id="check" name="check" class="element checkbox" type="checkbox" value="0" />
+			<input id="check" name="check" class="element checkbox" type="checkbox" value="0" checked="false" />
 <label class="choice" for="element_10_1">I've double-checked all fields. I've correctly put in the YouTube code. I'm sure that the score I provide is public domain.</label>
 
 		</span> 
 		</li>		<li id="li_11" >
-		<label class="description" for="element_11">Chose an opus code for this composition </label>
+		<label class="description" for="element_11">Choose an opus code for this composition </label>
 		<div>
 			<input id="opus" name="opus" class="element text medium" type="text" maxlength="255" value=""/> 
 		</div><p class="guidelines" id="guide_11"><small>Example: walkuere1 for the first act of "Die Walküre" by Richard Wagner. The composition will then be available under http://partitur.org/opuscode</small></p> 
@@ -84,14 +96,134 @@ They MUST be public domain!</small></p>
 					<li class="buttons">
 			    <input type="hidden" name="form_id" value="1359" />
 			    
-				<input id="saveForm" class="button_text" type="submit" name="submit" value="Submit" />
+				<input id="saveForm" onclick="" class="button_text" type="submit" name="submit" value="Submit" />
 		</li>
+		
 			</ul>
+			
+			<b><div id="errmsg" style="color:red;margin:10px"></div></b>
 		</form>	
+		
+		
+		
 		<div id="footer">
 			Generated by <a href="http://www.phpform.org">pForm</a>
 		</div>
 	</div>
-	<img id="bottom" src="bottom.png" alt="">
+	</div>
+	
+	<div id="form_container">
+	<div id="msg" style="display:none;">
+			<table cellpadding="10px">
+			<tr>
+				<td>
+			<div class="pa" style=""><img style="width:80px;height:80px;" src="../favicon.ico"></div></td><td>
+			<div class="pa" style=""><h2>Bitte warten... / Please wait... <img src="loading.gif"></h2>
+			<p>Die Partitur wird heruntergeladen. Das kann wenige Minuten dauern.</p></div>
+			</td></tr></table>	
+	
+	</div>
+	</div>
+	
+	<script>
+		
+document.getElementById("check").checked = false; 
+
+function isNumber(n) { return /^-?[\d.]+(?:e-?\d+)?$/.test(n); } 
+
+function ValidURL(str) {
+  var pattern = new RegExp('^(https?:\/\/)?'+ // protocol
+    '((([a-z\d]([a-z\d-]*[a-z\d])*)\.)+[a-z]{2,}|'+ // domain name
+    '((\d{1,3}\.){3}\d{1,3}))'+ // OR ip (v4) address
+    '(\:\d+)?(\/[-a-z\d%_.~+]*)*'+ // port and path
+    '(\?[;&a-z\d%_.~+=-]*)?'+ // query string
+    '(\#[-a-z\d_]*)?$','i'); // fragment locater
+  if(!pattern.test(str)) {
+    alert("Please enter a valid URL.");
+    return false;
+  } else {
+    return true;
+  }
+}
+
+function validateForm() {
+    var title = document.getElementById("title").value;
+    var composer = document.getElementById("composer").value;
+    var ytcode = document.getElementById("ytcode").value;
+    var begin = document.getElementById("begin").value;
+    var end = document.getElementById("end").value;
+    var score = document.getElementById("email").value;
+    var name = document.getElementById("name").value;
+    var email = document.getElementById("email").value;
+    var check = document.getElementById("check").checked;
+    var opus = document.getElementById("opus").value;
+    
+    validRegEx = /^[^\\\/&]*$/;
+    var errormsg = "";
+    var good = true;
+    if (!((title.match(validRegEx) == title) && (title))) {
+        errormsg += "Title is empty or contains invalid chars.<br>";
+        good = false;
+    }
+    if (!(composer.match(validRegEx) == composer && (title))) {
+        errormsg += "Composer is empty or contains invalid characters.<br>";
+        good = false;
+    }
+    if (ytcode.length != 11) {
+        errormsg += "YouTube code is invalid (must be 11 characters long).<br>";
+        good = false;
+    }
+    if (!(isNumber(begin))) {
+        errormsg += "Begin time must be a number.<br>";
+        good = false;
+    }
+    if (!(isNumber(end))) {
+        errormsg += "End time must be a number.<br>";
+        good = false;
+    }
+    if (!(score)) {
+        errormsg += "Score URL must not be empty.<br>";
+        good = false;
+    }
+    else {
+    
+	    if (!(ValidURL(score))) {
+	        errormsg += "Score URL appears to be invalid.<br>";
+	        good = false;	
+		}
+	}
+    if (!(name)) {
+        errormsg += "Please provide a name.<br>";
+        good = false;
+    }
+    if (!(email)) {
+        errormsg += "Please provide an email adress.<br>";
+        good = false;
+    }
+    if (!(check == true)) {
+        errormsg += "Please confirm that you've put in all fields correctly and check the box.<br>";
+        good = false;
+    }
+    if (!(opus.match(validRegEx) == opus && (opus))) {
+        errormsg += "Please think of an an valid opus code.";
+        good = false;
+    }
+    if (!(opus.length > 4 && opus.length < 20)) {
+        errormsg += "The opus code is too long or too short (allowed number of characters: 4-20).";
+        good = false;
+    }
+    
+    document.getElementById("errmsg").innerHTML = errormsg;
+    document.getElementById("errmsg0").innerHTML = "Some fields appear to be invalid. Please take a look at the bottom and check your input again.";
+    console.log(good);
+    
+    if (good == true) {
+		dimOff();
+	}
+    return false;
+}
+	
+	
+	</script>
 	</body>
 </html>

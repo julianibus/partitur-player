@@ -3,7 +3,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Progress - Online Partitur Player</title>
 <link rel="stylesheet" type="text/css" href="view.css" media="all">
-<script type="text/javascript" src="view.js"></script>
 
 </head>
 <body id="main_body">
@@ -33,6 +32,7 @@ function flogerror($msg) {
 
 //Create unique jobid
 $jobid = date('Ymd-H-i-s');
+$failed = false;
 
 ##################### SECTION 1: FORM VALIDATION ##############################
 flog("Reading fields...");
@@ -52,6 +52,7 @@ $score = $_REQUEST["score"];
 ##################### SECTION 1: CREATE FILE STRUCTURE #######################
 flog("Creating file structure...");
 $folder = "../rep/".$jobid;
+$nfolder = "../rep/".$opus;
 $mediafolder = "../rep/".$jobid."/media";
 $pdf = "../rep/".$jobid."/media/pdf.pdf";
 $infofile = "../rep/".$jobid."/info.dat";
@@ -64,6 +65,7 @@ if (!file_exists($folder)) {
 }
 else {
 	flogerror("Error while creating file structure.");
+	$failed = true;
 }
 
 ##################### SECTION 3: FILE DOWNLOAD #################################
@@ -84,9 +86,10 @@ file_put_contents($path, $data);
 ##################### SECTION 4: PDF TO  IMAGE CONVERSION ########################
 flogb("Processing PDF file...");
 $imagick = new Imagick();
+$imagick->setResolution(150,150);
 $imagick->readImage($pdf);
 //$imagick->writeImage($pdfimg, false);
-$imagick->setImageCompressionQuality(140);
+$imagick->setImageCompressionQuality(300);
 $num_pages = $imagick->getNumberImages();
 for($i = 0;$i < $num_pages; $i++) {         
 	flog("		Page ".$i);
@@ -123,7 +126,31 @@ file_put_contents($scorefile, $content2);
 
 
 ##################### SECTION 6: OUTPUT FURTHER INSTRUCTIONS ######################
+
+//Finish job by renaming dir
+if (!file_exists($nfolder)) {
+    rename($folder, $nfolder);
+}
+else {
+	flogerror("Error while creating file structure.");
+	$failed = true;
+}
+
+
+if ($failed == true){
+	exit();
+}
 ?>
+</div>
+<div id="msg" style="display:none;">
+	<table cellpadding="10px">
+	<tr>
+		<td>
+	<div class="pa" style=""><img style="width:80px;height:80px;" src="../favicon.ico"></div></td><td>
+	<div class="pa" style=""><h2>Hinzufügen erfolgreich / Composition added ></h2>
+	<p></p></div>
+	</td></tr></table>	
+
 </div>
 </body>
 </html>

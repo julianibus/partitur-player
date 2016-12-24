@@ -1,3 +1,5 @@
+
+
 body
 {
 	background:#fffff;
@@ -19,7 +21,7 @@ body
 #top
 {
 	display:block;
-	height:10px;
+	height:0px;
 	margin:10px auto 0;
 	width:650px;
 }
@@ -148,10 +150,7 @@ form li:after
 	height:1%;
 }
 
-* html form li div
-{
-	display:inline-block;
-}
+
 
 form li div
 {
