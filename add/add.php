@@ -35,7 +35,7 @@ $jobid = date('Ymd-H-i-s');
 $failed = false;
 
 ##################### SECTION 1: FORM VALIDATION ##############################
-flog("Reading fields...");
+//flog("Reading fields...");
 
 $title = $_REQUEST["title"];
 $ytcode = $_REQUEST["ytcode"];
@@ -50,7 +50,7 @@ $opus = $_REQUEST["opus"];
 $score = $_REQUEST["score"];
 
 ##################### SECTION 1: CREATE FILE STRUCTURE #######################
-flog("Creating file structure...");
+//flog("Creating file structure...");
 $folder = "../rep/".$jobid;
 $nfolder = "../rep/".$opus;
 $mediafolder = "../rep/".$jobid."/media";
@@ -69,7 +69,7 @@ else {
 }
 
 ##################### SECTION 3: FILE DOWNLOAD #################################
-flog("Downloading full score...");
+//flog("Downloading full score...");
 
 $url  = $score;
 $path = $pdf;
@@ -82,9 +82,10 @@ $data = curl_exec($ch);
 curl_close($ch);
 
 file_put_contents($path, $data);
-
 ##################### SECTION 4: PDF TO  IMAGE CONVERSION ########################
-flogb("Processing PDF file...");
+//flogb("Processing PDF file...");
+
+try {
 $imagick = new Imagick();
 $imagick->setResolution(150,150);
 $imagick->readImage($pdf);
@@ -92,7 +93,7 @@ $imagick->readImage($pdf);
 $imagick->setImageCompressionQuality(300);
 $num_pages = $imagick->getNumberImages();
 for($i = 0;$i < $num_pages; $i++) {         
-	flog("		Page ".$i);
+	//flog("		Page ".$i);
 
 	// Set iterator postion
 	$imagick->setIteratorIndex($i);
@@ -100,7 +101,11 @@ for($i = 0;$i < $num_pages; $i++) {
 	// Write Images to temp 'upload' folder     
 	$imagick->writeImage("../rep/".$jobid."/media/".$opus."-".$i.".png");
 }
-flogb("Done.");
+}
+catch (Exception $e) {
+	flogerror("PDF processing went wrong.");
+}
+//flogb("Done.");
 
 ##################### SECTION 5: CREATE INFO FILE #################################
 
@@ -141,16 +146,19 @@ if ($failed == true){
 	exit();
 }
 ?>
-</div>
-<div id="msg" style="display:none;">
+
+<div id="msg" style="display:inline;">
 	<table cellpadding="10px">
 	<tr>
-		<td>
-	<div class="pa" style=""><img style="width:80px;height:80px;" src="../favicon.ico"></div></td><td>
-	<div class="pa" style=""><h2>Hinzufügen erfolgreich / Composition added ></h2>
-	<p></p></div>
+		<td style="vertical-align:top;">
+	<div class="pa" style="vertical-align:top;"><img style="width:80px;height:80px;" src="../favicon.ico"></div></td><td>
+	<div class="pa" style=""><h2>Hinzufügen erfolgreich / Composition added</h2>
+	<p>Das Werk ist ab jetzt unter <pre>http://partitur.org/<?php echo $opus;?></pre>verfügbar, der Editor über<pre>http://partitur.org/<?php echo $opus;?>&editor=1</pre>aufrufbar.</p>
+	<p style="text-align="center"><a href='http://partitur.org/<?php echo $opus;?>&editor=1'>Syncing-Editor jetzt starten.</a></p></div>
 	</td></tr></table>	
 
 </div>
+</div>
+
 </body>
 </html>
