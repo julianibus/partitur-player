@@ -154,11 +154,27 @@ if ($failed == true){
 	<div class="pa" style="vertical-align:top;"><img style="width:80px;height:80px;" src="../favicon.ico"></div></td><td>
 	<div class="pa" style=""><h2>Hinzufügen erfolgreich / Composition added</h2>
 	<p>Das Werk ist ab jetzt unter <pre>http://partitur.org/<?php echo $opus;?></pre>verfügbar, der Editor über<pre>http://partitur.org/<?php echo $opus;?>&editor=1</pre>aufrufbar.</p>
-	<p style="text-align="center"><a href='http://partitur.org/<?php echo $opus;?>&editor=1'>Syncing-Editor jetzt starten.</a></p></div>
+	<p style="text-align="center"><a href='http://partitur.org/<?php echo $opus;?>&editor=1'>Editor jetzt starten.</a></p></div>
 	</td></tr></table>	
 
 </div>
 </div>
+
+<script type="text/javascript">
+var sc_project=11187792; 
+var sc_invisible=1; 
+var sc_security="f3fde1da"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="shopify
+analytics ecommerce" href="http://statcounter.com/shopify/"
+target="_blank"><img class="statcounter"
+src="//c.statcounter.com/11187792/0/f3fde1da/1/"
+alt="shopify analytics ecommerce"></a></div></noscript>
 
 </body>
 </html>
