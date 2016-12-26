@@ -83,14 +83,19 @@ curl_close($ch);
 
 file_put_contents($path, $data);
 ##################### SECTION 4: PDF TO  IMAGE CONVERSION ########################
+ini_set('max_execution_time', 10000);//you can change this limit
+ini_set("memory_limit", "256M");//you can change this limit
 //flogb("Processing PDF file...");
-
-try {
+// pixel cache max size
+IMagick::setResourceLimit(imagick::RESOURCETYPE_MEMORY, 512);
+// maximum amount of memory map to allocate for the pixel cache
+IMagick::setResourceLimit(imagick::RESOURCETYPE_MAP, 512);
 $imagick = new Imagick();
 $imagick->setResolution(150,150);
 $imagick->readImage($pdf);
 //$imagick->writeImage($pdfimg, false);
-$imagick->setImageCompressionQuality(300);
+$imagick->setImageCompressionQuality(40);
+
 $num_pages = $imagick->getNumberImages();
 for($i = 0;$i < $num_pages; $i++) {         
 	//flog("		Page ".$i);
@@ -101,10 +106,7 @@ for($i = 0;$i < $num_pages; $i++) {
 	// Write Images to temp 'upload' folder     
 	$imagick->writeImage("../rep/".$jobid."/media/".$opus."-".$i.".png");
 }
-}
-catch (Exception $e) {
-	flogerror("PDF processing went wrong.");
-}
+
 //flogb("Done.");
 
 ##################### SECTION 5: CREATE INFO FILE #################################
@@ -113,9 +115,7 @@ $content = "";
 $content .= "title#".$title."\n";
 $content .= "composer#".$composer."\n";
 $content .= "score#".$source."\n";
-$content .= "score-url#".$source."\n";
 $content .= "music#".$ytcode."\n";
-$content .= "music-url#".$ytcode."\n";
 $content .= "code#".$ytcode."\n";
 $content .= "begin#".$begin."\n";
 $content .= "end#".$end."\n";
@@ -152,9 +152,9 @@ if ($failed == true){
 	<tr>
 		<td style="vertical-align:top;">
 	<div class="pa" style="vertical-align:top;"><img style="width:80px;height:80px;" src="../favicon.ico"></div></td><td>
-	<div class="pa" style=""><h2>Hinzufügen erfolgreich / Composition added</h2>
-	<p>Das Werk ist ab jetzt unter <pre>http://partitur.org/<?php echo $opus;?></pre>verfügbar, der Editor über<pre>http://partitur.org/<?php echo $opus;?>&editor=1</pre>aufrufbar.</p>
-	<p style="text-align="center"><a href='http://partitur.org/<?php echo $opus;?>&editor=1'>Editor jetzt starten.</a></p></div>
+	<div class="pa" style=""><h2>Composition added</h2>
+	<p>When finidhed the composition will be available at <pre>http://partitur.org/<?php echo $opus;?></pre>Now continue to the editor for syncing full score and music. It can be found at:<pre>http://partitur.org/<?php echo $opus;?>&editor=1</pre></p>
+	<p style="text-align="center"><a href='http://partitur.org/add/edit.php?opus=<?php echo $opus;?>'>STsART EDITOR NOW</a></p></div>
 	</td></tr></table>	
 
 </div>
