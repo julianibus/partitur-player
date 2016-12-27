@@ -66,7 +66,7 @@ $text = file_get_contents($file);
 <br>
 <!-- HTML form -->
 <form action="" method="post">
-<textarea style="width:100%; height: 300px;margin:10px;" name="text"><?php echo htmlspecialchars($text) ?></textarea>
+<textarea style="width:97%; height: 300px;margin:10px;" name="text"><?php echo htmlspecialchars($text) ?></textarea>
 <br>
 <p style="text-align:center;">
 <input type="submit" value="Save"/> <input type="button" onclick="location.href='edit.php?opus=<?php echo $opus;?>'" value="Cancel and go back" />

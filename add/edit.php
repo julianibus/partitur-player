@@ -58,7 +58,16 @@ if ( !(isset( $_GET['opus'] ) && !empty( $_GET['opus'] )) ) {
 <p><a href="editor.php?opus=<?php echo $opus;?>&mode=3">Start editing repetitions</a></p>
 </div>
 
-.
+
+<br>
+<br>
+<p style="margin:10px;">
+<a href="http://partitur.org/<?php echo $opus; ?>">Test this composition</a>
+<br><br>
+<a href="http://partitur.org/">Return to the main page</a><br>
+<a href="http://partitur.org/add">Add another composition</a>
+</p>
+
 </div>
 
 <script type="text/javascript">

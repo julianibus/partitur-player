@@ -7,6 +7,7 @@
 </head>
 <body id="main_body">
 <div id="form_container">
+
 <?php
 
 ob_implicit_flush(true);
@@ -72,8 +73,7 @@ else {
 ##################### SECTION 3: FILE DOWNLOAD #################################
 //flog("Downloading full score...");
 
-$output = shell_exec("sh fetch.sh ".$mediafolder." " . $score . " " . $pdfloc . " " . $opus);
-echo "<pre>$output</pre>";
+shell_exec("sh fetch.sh ".$mediafolder." " . $score . " " . $pdfloc . " " . $opus.' 2>&1 > ' . $folder . '/out.log');
 
 //flogb("Done.");
 
@@ -93,7 +93,7 @@ $content .= "links#";
 
 file_put_contents($infofile, $content);
 
-$content2 = "0";
+$content2 = "0\n0";
 file_put_contents($scorefile, $content2);
 
 
@@ -115,19 +115,15 @@ if ($failed == true){
 }
 ?>
 
-<div id="msg" style="display:inline;">
-	<table cellpadding="10px">
-	<tr>
-		<td style="vertical-align:top;">
-	<div class="pa" style="vertical-align:top;"><img style="width:80px;height:80px;" src="../favicon.ico"></div></td><td>
-	<div class="pa" style=""><h2>Composition added</h2>
-	<p>When finished the composition will be available at <pre>http://partitur.org/<?php echo $opus;?></pre>Now continue to the editor for syncing full score and music. It can be found at:<pre>http://partitur.org/<?php echo $opus;?>&editor=1</pre></p>
-	<p style="text-align="center"><a href='http://partitur.org/add/edit.php?opus=<?php echo $opus;?>'>STsART EDITOR NOW</a></p></div>
-	</td></tr></table>	
+			<table cellpadding="10px">
+			<tr>
+				<td>
+			<div class="pa" style=""><img style="width:80px;height:80px;" src="../favicon.ico"></div></td><td>
+			<div class="pa" style=""><h2>Composition added<img src="loading.gif"></h2>
+			<p>Please proceed to <a href="http://partitur.org/add/edit.php?opus=<?php echo $opus; ?>">this page</a> in order to start editing.</p></div>
+			</td></tr></table>	
 
 </div>
-</div>
-
 <script type="text/javascript">
 var sc_project=11187792; 
 var sc_invisible=1; 
@@ -143,6 +139,7 @@ analytics ecommerce" href="http://statcounter.com/shopify/"
 target="_blank"><img class="statcounter"
 src="//c.statcounter.com/11187792/0/f3fde1da/1/"
 alt="shopify analytics ecommerce"></a></div></noscript>
+
 
 </body>
 </html>
