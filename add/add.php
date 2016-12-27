@@ -55,6 +55,7 @@ $folder = "../rep/".$jobid;
 $nfolder = "../rep/".$opus;
 $mediafolder = "../rep/".$jobid."/media";
 $pdf = "../rep/".$jobid."/media/pdf.pdf";
+$pdfloc = "pdf.pdf";
 $infofile = "../rep/".$jobid."/info.dat";
 $scorefile = "../rep/".$jobid."/score";
 $pdfimg = "../rep/".$jobid."/media/".$opus.".png";
@@ -71,41 +72,8 @@ else {
 ##################### SECTION 3: FILE DOWNLOAD #################################
 //flog("Downloading full score...");
 
-$url  = $score;
-$path = $pdf;
-
-$ch = curl_init($url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-$data = curl_exec($ch);
-
-curl_close($ch);
-
-file_put_contents($path, $data);
-##################### SECTION 4: PDF TO  IMAGE CONVERSION ########################
-ini_set('max_execution_time', 10000);//you can change this limit
-ini_set("memory_limit", "256M");//you can change this limit
-//flogb("Processing PDF file...");
-// pixel cache max size
-IMagick::setResourceLimit(imagick::RESOURCETYPE_MEMORY, 512);
-// maximum amount of memory map to allocate for the pixel cache
-IMagick::setResourceLimit(imagick::RESOURCETYPE_MAP, 512);
-$imagick = new Imagick();
-$imagick->setResolution(150,150);
-$imagick->readImage($pdf);
-//$imagick->writeImage($pdfimg, false);
-$imagick->setImageCompressionQuality(40);
-
-$num_pages = $imagick->getNumberImages();
-for($i = 0;$i < $num_pages; $i++) {         
-	//flog("		Page ".$i);
-
-	// Set iterator postion
-	$imagick->setIteratorIndex($i);
-
-	// Write Images to temp 'upload' folder     
-	$imagick->writeImage("../rep/".$jobid."/media/".$opus."-".$i.".png");
-}
+$output = shell_exec("sh fetch.sh ".$mediafolder." " . $score . " " . $pdfloc . " " . $opus);
+echo "<pre>$output</pre>";
 
 //flogb("Done.");
 
@@ -153,7 +121,7 @@ if ($failed == true){
 		<td style="vertical-align:top;">
 	<div class="pa" style="vertical-align:top;"><img style="width:80px;height:80px;" src="../favicon.ico"></div></td><td>
 	<div class="pa" style=""><h2>Composition added</h2>
-	<p>When finidhed the composition will be available at <pre>http://partitur.org/<?php echo $opus;?></pre>Now continue to the editor for syncing full score and music. It can be found at:<pre>http://partitur.org/<?php echo $opus;?>&editor=1</pre></p>
+	<p>When finished the composition will be available at <pre>http://partitur.org/<?php echo $opus;?></pre>Now continue to the editor for syncing full score and music. It can be found at:<pre>http://partitur.org/<?php echo $opus;?>&editor=1</pre></p>
 	<p style="text-align="center"><a href='http://partitur.org/add/edit.php?opus=<?php echo $opus;?>'>STsART EDITOR NOW</a></p></div>
 	</td></tr></table>	
 
