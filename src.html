@@ -49,10 +49,9 @@ $(document).ready(function(){
 			}
 			else {
 				var mx = mousex - magnify_offset.left;
-				var my = mousey - magnify_offset.top;				
-			}
+				var my = mousey - magnify_offset.top;
 			//console.log(mx + " ---- " + my + "- " + e.pageX + " ---- " + e.pageY);
-
+			}
 
 			if(mx < $(this).width() && my < $(this).height() && mx > 0 && my > 0)
 			{
@@ -271,7 +270,23 @@ opus = "_OPUS_";
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'rep/_OPUS_/score', false);
 xhr.send(null);
-var trackscore = xhr.responseText.split('\n');
+var trackscoreraw = xhr.responseText.split('\n');
+
+var trackscore = new Array();
+var trackscorejump = new Array();
+
+for (var i = 0; i < trackscoreraw.length; i++){
+	elarray = trackscoreraw[i].split(',');
+	trackscore.push(elarray[0]);
+	
+	if (!(elarray[1] === undefined || elarray[1] === null)) {
+		trackscorejump.push(elarray[1]);
+	}
+	else {
+		trackscorejump.push("");
+	}
+	
+}
 
 
 $(document).ready(function() {		
@@ -322,7 +337,25 @@ var markers = xhr2.responseText.split('\n');
 			var lines = $('#textarea').val().split(/\n/);
 			lines[recordcursor] = t.toString();
 			$("#textarea").val(lines.join("\n"));
-			trackscore = $('#textarea').val().split(/\n/);
+			
+			trackscoreraw = $('#textarea').val().split(/\n/);
+			trackscore = new Array();
+trackscorejump = new Array();
+
+for (var i = 0; i < trackscoreraw.length; i++){
+	elarray = trackscoreraw[i].split(',');
+	trackscore.push(elarray[0]);
+	
+	if (!(elarray[1] === undefined || elarray[1] === null)) {
+		trackscorejump.push(elarray[1]);
+	}
+	else {
+		trackscorejump.push("");
+	}
+	
+}
+console.log(trackscore);
+console.log(trackscorejump);
 			
 			recordcursor += 1;
 			$("#indicator").html(recordcursor);
@@ -330,7 +363,26 @@ var markers = xhr2.responseText.split('\n');
 	});	
 	$(document).ready(function() {		
 		$("#textarea").click( function() {
-			trackscore = $('#textarea').val().split(/\n/);
+			trackscoreraw = $('#textarea').val().split(/\n/);
+			
+			trackscore = new Array();
+trackscorejump = new Array();
+
+for (var i = 0; i < trackscoreraw.length; i++){
+	elarray = trackscoreraw[i].split(',');
+	trackscore.push(elarray[0]);
+	
+	if (!(elarray[1] === undefined || elarray[1] === null)) {
+		trackscorejump.push(elarray[1]);
+	}
+	else {
+		trackscorejump.push("");
+	}
+	
+}
+console.log(trackscore);
+console.log(trackscorejump);		
+			
 			recordcursor = textarea.value.substr(0, textarea.selectionStart).split("\n").length - 1;
 			$("#indicator").html(recordcursor);
 			player.seekTo($('#textarea').val().split(/\n/)[recordcursor - 1]);
@@ -482,12 +534,23 @@ setInterval(function update() {
 	
 	//UPDATE SCORE
 	cursor = 1;
+	scorecursor = 1;
+	jumpahead = false;
 	while (parseInt(trackscore[cursor]) < t) {
+		jumpahead = false;
 		cursor = cursor + 1;
+		
+		scorecursor = scorecursor + 1;
+		
+		if (trackscorejump[cursor-1] != "") {
+			scorecursor = parseInt(trackscorejump[cursor-1]);
+			jumpahead = true;
+		}
 	}
+	console.log(jumpahead);
 	if (cursor == lastcursor + 1) {
 		lastcursor = cursor;
-		if (cursor > 1) {
+		if ((cursor > 1) && (!(jumpahead))) {
 			transission();
 		}
 	}
@@ -495,11 +558,14 @@ setInterval(function update() {
 		lastcursor = cursor;
 	}
 	//console.log(t, cursor);
+	console.log("Cursor" + cursor),
+	console.log("SC:" + scorecursor);
 	cursor = cursor - 1;
+	scorecursor = scorecursor - 1;
 	//console.log(document.getElementById("score2").src, "rep/_OPUS_/media/_OPUS_-" + cursor.toString() + ".png", cursor);
-	if ((document.getElementById("score").src != "rep/_OPUS_/media/_OPUS_-" + cursor.toString() + ".png") && (cursor >= 0))  {
-		document.getElementById("score").src="rep/_OPUS_/media/_OPUS_-" + cursor.toString() + ".png";
-		document.getElementById("large").style.background = "url('" + "rep/_OPUS_/media/_OPUS_-" + cursor.toString() + ".png" + "') no-repeat";
+	if ((document.getElementById("score").src != "rep/_OPUS_/media/_OPUS_-" + scorecursor.toString() + ".png") && (scorecursor >= 0))  {
+		document.getElementById("score").src="rep/_OPUS_/media/_OPUS_-" + scorecursor.toString() + ".png";
+		document.getElementById("large").style.background = "url('" + "rep/_OPUS_/media/_OPUS_-" + scorecursor.toString() + ".png" + "') no-repeat";
 	}
 	if (cursor + 1 <= trackscore.length - 1) {
 		var duration = trackscore[cursor + 1] - trackscore[cursor];
@@ -528,8 +594,9 @@ setInterval(function update() {
 		} 
 	
 	cursor = cursor + 1;
-	if((document.getElementById("score2").src != "rep/_OPUS_/media/_OPUS_-" + cursor.toString() + ".png") && (cursor >= 0)) {
-		document.getElementById("score2").src="rep/_OPUS_/media/_OPUS_-" + cursor.toString() + ".png";
+	scorecursor = scorecursor + 1;
+	if((document.getElementById("score2").src != "rep/_OPUS_/media/_OPUS_-" + scorecursor.toString() + ".png") && (scorecursor >= 0)) {
+		document.getElementById("score2").src="rep/_OPUS_/media/_OPUS_-" + scorecursor.toString() + ".png";
 		$('#magnify').trigger('mousemove');
 	}
 
@@ -607,8 +674,8 @@ transissionactive = true;
 function transission(){
 $("#copy").remove();
 $("#copy2").remove();
-logmsg(cursor.toString());	
-
+console.log(scorecursor.toString());	
+console.log(cursor.toString());	
 if (transissionactive == true) {
 var oold = $('#score2');
 
@@ -620,7 +687,7 @@ var oldOffset = oold.offset();
 topcorr = 0;
 leftcorr = 0;
 var oImg=document.createElement("img");
-oImg.setAttribute('src', "rep/_OPUS_/media/_OPUS_-" + (cursor-1).toString() + ".png");
+oImg.setAttribute('src', "rep/_OPUS_/media/_OPUS_-" + (parseInt(scorecursor) - 1).toString() + ".png");
 oImg.setAttribute('alt', 'Loading...');
 oImg.setAttribute('height', height + "px");
 oImg.setAttribute('width', width+"px");
@@ -630,7 +697,7 @@ oImg.setAttribute('style', "background-color:white;position: absolute;z-index:60
 document.body.appendChild(oImg);
 
 var oImg2=document.createElement("img");
-oImg2.setAttribute('src', "rep/_OPUS_/media/_OPUS_-" + (cursor-2).toString() + ".png");
+oImg2.setAttribute('src', "rep/_OPUS_/media/_OPUS_-" + (scorecursor-2).toString() + ".png");
 oImg2.setAttribute('alt', 'Loading...');
 oImg2.setAttribute('height', height + "px");
 oImg2.setAttribute('width', width+"px");
