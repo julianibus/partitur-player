@@ -7,18 +7,6 @@
 <meta id="meta" name="viewport" content="width=device-width; initial-scale=0.8" />
 <link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
 <link rel="stylesheet" href="style.css">
-<script type="text/javascript" src="jquery.socialshareprivacy.js"></script>
-<script type="text/javascript">
-  jQuery(document).ready(function($){
-    if($('#socialshareprivacy').length > 0){
-      $('#socialshareprivacy').socialSharePrivacy({
-        "css_path"  : "js/plugins/socialshareprivacy/socialshareprivacy.css",
-        "lang_path" : "js/plugins/socialshareprivacy/lang/",
-        "language"  : "de"
-      });
-    }
-  });
-</script>
 
 </head>
 <body>
@@ -43,9 +31,9 @@ Music, video, text and full score - the Online Partitur Player allows you to get
 <p style="text-align:center;">
 
 <a href="http://facebook.com/partitur-player"><img src="res/follow.png"></a>  <!--<a href="add" ><img src="res/contribute.png"></a>---></p>
-<p style="border-width: 1px; border-style:solid; border-color:red; padding:2px">
-<font color="red">
-This project went online last week. More compositions will be added soon. <a href="https://www.facebook.com/partiturplayer">Like the FB page for updates</a> or send your suggestions to the email adress found at the bottom.
+<p style="border-width: 1px; border-style:solid; border-color:green; padding:2px">
+<font color="green">
+More compositions will be added soon. <a href="https://www.facebook.com/partiturplayer">Like the FB page for updates</a> or send your suggestions to the email adress found at the bottom.
 </font>
 </p>
 </div>
@@ -96,23 +84,57 @@ This project went online last week. More compositions will be added soon. <a hre
 </table>
 </p>
 </div>	
-
+<br>
+<table>
+<tr>
+<td><img src="res/potion.png" style="width:64px;height:64px;"></td><td>
 <p><b>Tristan und Isolde</b><br>
 <a class="work" href="/tristan1">Akt I</a>
 <a class="work" href="/tristan2">Akt II</a>
-Akt III
+<a class="work" href="/tristan3">Akt III</a>
 </p>
+</td>
+</tr>
+</table>
 
 <h4 class="decorated"><span>Antonín Dvořák (1841 - 1904)</span></h4>
 
 <p><b>Sinfonien</b><br>
-<a class="work" href="/dvoraksym9">Nr. 9 "Aus der Neuen Welt"</a> <a class="scene" href="/dvoraksym9">1</a> <a class="scene" href="/dvoraksym9?&=642">2</a>
+<a class="work" href="/dvoraksym9">Nr. 9 "Aus der Neuen Welt"</a> <a class="scene" href="/dvoraksym9">1</a> <a class="scene" href="/dvoraksym9&t=642">2</a>
 <a class="scene" href="/dvoraksym9&t=1410">3</a> <a class="scene" href="/dvoraksym9&t=1927">4</a></p>
+
+
 
 <h4 class="decorated"><span>W. A. Mozart (1756 - 1791)</span></h4>
 <p><b>Sinfonien</b><br>
-<a class="work" href="/mozartsym40">Nr. 40 g-Moll</a> <a class="scene" href="/mozartsym40">1</a> <a class="scene" href="/mozartsym40?&=546">2</a>
-<a class="scene" href="/mozartsym40&t=1039">3</a> <a class="scene" href="/mozartsym40&t=1341">4</a></p>
+
+<a class="work" href="/mozartsym25">Nr. 25 g-Moll</a> <a class="scene" href="/mozartsym25">1</a> <a class="scene" href="/mozartsym25&t=523">2</a>
+<a class="scene" href="/mozartsym25&t=907">3</a> <a class="scene" href="/mozartsym25&t=1146">4</a>
+<br>
+
+<a class="work" href="/mozartsym31">Nr. 31 D-Dur "Pariser"</a> <a class="scene" href="/mozartsym31">1</a> <a class="scene" href="/mozartsym31&t=531">2</a>
+<a class="scene" href="/mozartsym31&t=888">3</a>
+<br>
+
+
+<a class="work" href="/mozartsym35">Nr. 35 D-Dur "Haffner"</a> <a class="scene" href="/mozartsym35">1</a> <a class="scene" href="/mozartsym35&t=352">2</a>
+<a class="scene" href="/mozartsym35&t=776">3</a> <a class="scene" href="/mozartsym35&t=964">4</a>
+<br>
+
+<!---
+<a class="work" href="/mozartsym39">Nr. 39 Es-Dur</a> <a class="scene" href="/mozartsym39">1</a> <a class="scene" href="/mozartsym39&t=666">2</a>
+<a class="scene" href="/mozartsym39&t=1186">3</a> <a class="scene" href="/mozartsym39&t=1447">4</a>
+<br>
+--->
+<a class="work" href="/mozartsym40">Nr. 40 g-Moll</a> <a class="scene" href="/mozartsym40">1</a> <a class="scene" href="/mozartsym40&t=546">2</a>
+<a class="scene" href="/mozartsym40&t=1039">3</a> <a class="scene" href="/mozartsym40&t=1341">4</a>
+<br>
+<!---
+<a class="work" href="/mozartsym41">Nr. 41 C-Dur "Jupiter"</a> <a class="scene" href="/mozartsym41">1</a> <a class="scene" href="/mozartsym41&t=780">2</a>
+<a class="scene" href="/mozartsym41&t=1481">3</a> <a class="scene" href="/mozartsym41&t=1834">4</a></p>
+
+--->
+
 
 
 <h4 class="decorated"><span>Max Reger (1873 - 1916)</span></h4>
@@ -129,7 +151,8 @@ Akt III
 
 
 <h4 class="decorated"><span>Pjotr Iljitsch Tschaikowski (1840 - 1893)</span></h4>
-<a class="work" href="/tchaikovskyviolin">Violinkonzert Op. 35</a>
+<a class="work" href="/tchaikovskyviolin">Violinkonzert Op. 35</a> <a class="scene" href="/tchaikovskyviolin">1</a> <a class="scene" href="/tchaikovskyviolin&t=1190">2</a>
+<a class="scene" href="/tchaikovskyviolin&t=1589">3</a>
 </p>
 
 
