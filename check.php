@@ -20,6 +20,9 @@ Online Partitur Player: YouTube video availability
 
 <div id="content">
 <div style="text-align: center;"><a href="index.html">Back to index page</a></div>
+<p>
+Note: This table also contains incomplete or faulty compositions that are not listed on the main page.
+</p>
 	
 	<br>
 	<br>
