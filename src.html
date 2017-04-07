@@ -244,7 +244,7 @@ window.onbeforeunload = function (e) {
 
 var playeractive = true;
 var syncing = true;
-var t = _BEGIN_;
+var t = _BEGIN_ + _OFFSET_;
 <!--
 function toggle_visibility(id) {
 	var e = document.getElementById(id);
@@ -333,7 +333,7 @@ var markers = xhr2.responseText.split('\n');
 		
 	$(document).ready(function() {
 		$("#markbtn").click( function() {
-			t = player.getCurrentTime();
+			t = player.getCurrentTime() - _OFFSET_;
 			var lines = $('#textarea').val().split(/\n/);
 			lines[recordcursor] = t.toString();
 			$("#textarea").val(lines.join("\n"));
@@ -385,7 +385,7 @@ console.log(trackscorejump);
 			
 			recordcursor = textarea.value.substr(0, textarea.selectionStart).split("\n").length - 1;
 			$("#indicator").html(recordcursor);
-			player.seekTo($('#textarea').val().split(/\n/)[recordcursor - 1]);
+			player.seekTo($('#textarea').val().split(/\n/)[recordcursor - 1] + _OFFSET_);
 		});
 	});	
 	</script>
@@ -415,8 +415,8 @@ console.log(trackscorejump);
             'onStateChange': onPlayerStateChange
           },
 		  playerVars: {
-          start: _BEGINPLAY_,
-          end: _END_,
+          start: _BEGIN_ +  _OFFSET_,
+          end: _END_ +  _OFFSET_,
           'controls': 1,
           'rel': 0,
           'showinfo': 0,
@@ -453,7 +453,7 @@ console.log(trackscorejump);
 var skiptime = 0;
  $( document ).ready(function() { 
       $("#skip").click(function(event) { 
-        player.seekTo(skiptime);
+        player.seekTo(skiptime + _OFFSET_);
         event.preventDefault(); 
       }); 
  });
@@ -476,7 +476,7 @@ var skiptime = 0;
 <a href="#" onclick="player.playVideo();"><img style="width:16px; height:16px; position: relative;" src="play.png"></a>
 <a href="#" onclick="player.pauseVideo();"><img style="width:16px; height:16px; position: relative;" src="pause.png"></a>	
 <!-- <a href="#" onclick="player.stopVideo();"><img style="width:16px; height:16px; position: relative;" src="stop.png"></a>-->
-<a href="#" onclick="player.seekTo(_BEGIN_);"><img style="width:16px; height:16px; position: relative;" src="reset.png"></a>&nbsp;
+<a href="#" onclick="player.seekTo(_BEGIN_ +  _OFFSET_);"><img style="width:16px; height:16px; position: relative;" src="reset.png"></a>&nbsp;
 <div id="baro" style="display: inline;">
 LOADING...</div>
 <div id="skip" class="skip" style="display: inline; visibility: hidden; color: #ddddff; float: right; cursor: pointer;">
@@ -525,7 +525,7 @@ lastcursor = 0;
 
 setInterval(function update() {
 	if (syncing == true) {
-		t = player.getCurrentTime();
+		t = player.getCurrentTime() - _OFFSET_ ;
 	}
 	else {
 		t = t;
@@ -603,11 +603,11 @@ setInterval(function update() {
 	recordcursor = cursor;
 	$("#indicator2").html(cursor - 1);
 	$("#indicator").html(recordcursor);
-	$("#baro").html("p. " + recordcursor.toString() + " / " + trackscore.length.toString() +" - " + fmtMSS(Math.floor(t - _BEGIN_)) + " / " + fmtMSS(_END_ - _BEGIN_));
+	$("#baro").html("p. " + recordcursor.toString() + " / " + trackscore.length.toString() +" - " + fmtMSS(Math.floor(t - _BEGIN_)) + " / " + fmtMSS(_END_ +  _OFFSET_ - _BEGIN_ -  _OFFSET_));
 	$("#textarea").scrollTop = cursor;
 	
 	var elem3 = document.getElementById('progress-bar2');
-	var percent2 = ((t - _BEGIN_) / parseFloat(_END_ - _BEGIN_))*100;
+	var percent2 = ((t - _BEGIN_) / parseFloat(_END_ +  _OFFSET_ - _BEGIN_ -  _OFFSET_))*100;
 	elem3.style.width = percent2.toString() + "%";
 	
 	
@@ -672,6 +672,8 @@ setInterval(function update() {
 transissionactive = true;
 
 function transission(){
+	
+logmsg(cursor.toString());
 $("#copy").remove();
 $("#copy2").remove();
 console.log(scorecursor.toString());	
@@ -743,11 +745,11 @@ $('#barcontainer2').click(function (e){
 	var width = $("#barcontainer2").width();
     var per = mxPos/parseFloat(width);
     if (syncing == true) {
-		player.seekTo(per*(_END_ - _BEGIN_) + _BEGIN_);
-		t = player.getCurrentTime();
+		player.seekTo(per*(_END_ +  _OFFSET_ - _BEGIN_ -  _OFFSET_) + _BEGIN_ +  _OFFSET_);
+		t = player.getCurrentTime() - _OFFSET_;
 	}
 	else {
-		t = per*(_END_ - _BEGIN_) + _BEGIN_;
+		t = per*(_END_ +  _OFFSET_ - _BEGIN_ -  _OFFSET_) + _BEGIN_ +  _OFFSET_;
 	}
 });
 
@@ -764,7 +766,7 @@ $('#barcontainer2').mousemove(function (e){
 			var mxPos = mpageX - elm.offset().left;
 			var width = $("#barcontainer2").width();
 			var per = mxPos/parseFloat(width);
-			var tim = (per*(_END_ - _BEGIN_)); //Without _BEGIN_
+			var tim = (per*(_END_ +  _OFFSET_- _BEGIN_ -  _OFFSET_)); //Without _BEGIN_
 			return Math.floor(tim/parseFloat(60)) + ":" + n(Math.floor(tim%60)); },
 			
 	  });
@@ -777,10 +779,10 @@ function previous() {
 	$("#copy").remove();
 	$("#copy2").remove();
 	if (syncing == true){
-		player.seekTo(trackscore[cursor - 2]);
+		player.seekTo(parseFloat(trackscore[cursor - 2]) + parseFloat(_OFFSET_));
 	}
 	else {
-		t = trackscore[cursor - 2];
+		t = trackscore[cursor - 2] + _OFFSET_; 
 	}
 	
 }
@@ -789,10 +791,11 @@ function next() {
 	$("#copy").remove();
 	$("#copy2").remove();
 	if (syncing == true){
-		player.seekTo(trackscore[cursor]);
+		console.log((trackscore[cursor]).toString() + "---- " + (_OFFSET_).toString() + " ---" + (trackscore[cursor] + _OFFSET_).toString());
+		player.seekTo(parseFloat(trackscore[cursor]) + parseFloat(_OFFSET_));
 	}	
 	else{
-		t = trackscore[cursor];
+		t = trackscore[cursor] + _OFFSET_;
 	}
 	
 }

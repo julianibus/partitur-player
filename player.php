@@ -33,6 +33,7 @@ $myFile = "rep/" . $opus . "/info.dat";
 $fh = fopen($myFile, 'r');
 $theData = fread($fh, filesize($myFile));
 $assoc_array = array();
+$assoc_array["offset"] = 0;
 $my_array = explode("\n", $theData);
 foreach($my_array as $line)
 {
@@ -56,6 +57,7 @@ $src = str_replace("_CODE_", trim($info["code"]), $src);
 $src = str_replace("_END_", $info["end"], $src);
 $src = str_replace("_TRACKING_", $trackinghtml, $src);
 $src = str_replace("_BEGIN_", $info["begin"], $src);
+$src = str_replace("_OFFSET_", $info["offset"], $src);
 
 if ( isset( $_GET['t'] ) && !empty( $_GET['t'] ) ) {
 	$timecode = $_GET['t'];
