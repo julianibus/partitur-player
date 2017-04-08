@@ -43,6 +43,7 @@ function yt_exists($videoID) {
 function listFolderFiles($dir){
     $ffs = scandir($dir);
     echo '<table style="border-spacing: 10px 0;">';
+    echo "<tr><th>Code</th><th>Composer<br></th><th>Title<br></th><th>Recording & Score</th><th>Video</th></tr>";
     foreach($ffs as $ff){
         if($ff != '.' && $ff != '..'){
             if(is_dir($dir.'/'.$ff) && file_exists($dir.'/'.$ff . "/info.dat")) { 
@@ -63,17 +64,19 @@ function listFolderFiles($dir){
 				
 				
 				
-				echo "<tr><td><a href='http://partitur.org/$ff'>".$ff.'</a></td>';
+				echo "<tr><td style='vertical-align: top;'><a href='http://partitur.org/$ff'>".$ff.'</a></td>';
+				echo '<td style="vertical-align: top;">'.$info["composer"].'</td>';
+				echo '<td style="vertical-align: top;">'.$info["title"].'</td>';
+				echo '<td style="font-size: 10px"><b>Recording </b>'.$info["music"].' <b>Score</b> '.$info["score"].'</td>';
 					if (yt_exists($info["code"]) == true) {
-							echo '<td>'.$info["title"].'</td>';
-							echo '<td><b><font color="green">FOUND</font></b></td>';
+	
+							echo '<td style="vertical-align: top;"><b><font color="green">FOUND</font></b></td>';
 					}
 					else {
-						echo '<td><font color="red">'.$info["title"].'</font></td>';
-						echo '<td><b><font color="red">MISSING</font></b></td>';
+						echo '<td style="vertical-align: top;"><b><font color="red">MISSING</font></b></td>';
 					}
 				
-				echo '<td><a href="http://youtube.com/watch?v='.$info["code"].'">-></a></td>';
+				echo '<td style="vertical-align: top;"><a href="http://youtube.com/watch?v='.$info["code"].'">-></a></td>';
 				
 				echo '</tr>';
 				flush();

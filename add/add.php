@@ -119,7 +119,7 @@ if ($failed == true){
 			<tr>
 				<td>
 			<div class="pa" style=""><img style="width:80px;height:80px;" src="../favicon.ico"></div></td><td>
-			<div class="pa" style=""><h2>Composition added<img src="loading.gif"></h2>
+			<div class="pa" style=""><h2>Composition added</h2>
 			<p>Please proceed to <a href="http://partitur.org/add/edit.php?opus=<?php echo $opus; ?>">this page</a> in order to start editing.</p></div>
 			</td></tr></table>	
 
