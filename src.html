@@ -603,7 +603,7 @@ setInterval(function update() {
 	recordcursor = cursor;
 	$("#indicator2").html(cursor - 1);
 	$("#indicator").html(recordcursor);
-	$("#baro").html("p. " + recordcursor.toString() + " / " + trackscore.length.toString() +" - " + fmtMSS(Math.floor(t - _BEGIN_)) + " / " + fmtMSS(_END_ +  _OFFSET_ - _BEGIN_ -  _OFFSET_));
+	$("#baro").html("p. " + recordcursor.toString() + " / " + (trackscore.length - 1).toString() +" - " + fmtMSS(Math.floor(t - _BEGIN_)) + " / " + fmtMSS(_END_ +  _OFFSET_ - _BEGIN_ -  _OFFSET_));
 	$("#textarea").scrollTop = cursor;
 	
 	var elem3 = document.getElementById('progress-bar2');
