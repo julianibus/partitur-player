@@ -640,7 +640,7 @@ setInterval(function update() {
 		skipend = markers[index].split(",")[1];
 		
 		if ((t > skipstart) && (t < skipend)) {
-			document.getElementById('skip').style.visibility = 'visible'; 
+			//document.getElementById('skip').style.visibility = 'visible';  DEACTIVATED BECAUSE OF BUG
 			skiptime = skipend;
 			
 		}
