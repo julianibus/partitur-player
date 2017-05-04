@@ -28,7 +28,7 @@ if ( !(isset( $_GET['opus'] ) && !empty( $_GET['opus'] )) ) {
 <table cellpadding="10px">
 <tr>
 	<td style="vertical-align:top;">
-<div class="pa" style="vertical-align:top;"><img style="width:80px;height:80px;" src="../favicon.ico"></div></td><td>
+<div class="pa" style="vertical-align:top;"><img style="width:80px;height:80px;" src="../res/favicon.ico"></div></td><td>
 <div class="pa" style=""><h2>Editing <?php echo $opus;?></h2>
 <p>Choose what you want to edit.</p>
 

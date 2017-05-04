@@ -8,13 +8,13 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     <script src="js/jquery.transit.min.js"></script>
     <script type="text/javascript" src="js/css-pop.js"></script>
-    <link rel="stylesheet" href="template.css">  
-	<link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
+    <link rel="stylesheet" href="css/template.css">
+	<link rel='shortcut icon' type='image/x-icon' href='res/favicon.ico' />
 	<meta name="author" content="Julian Wienand" />
 	<meta name="description" content="Interaktive Partitur für _TITLE_ von _COMPOSER_ mit Musik, Bild und Text auf einen Blick." />
 
 
-<script src="prefixfree.js" type="text/javascript"></script>
+<script src="js/prefixfree.js" type="text/javascript"></script>
 <script>
 var lensactive = false;
 $(document).ready(function(){
@@ -310,10 +310,10 @@ var markers = xhr2.responseText.split('\n');
 <body style="height: 100%;">
 <ul>
 <li><a class="active" href="index.html"><b>Online Partitur Player</b></a></li>
-<li><a class="sharelink" href="#" id="share" onclick="document.getElementById('shareframe').src = 'share.php?opus=_OPUS_&t=' + Math.round(t).toString(); popup('popUpDiv');"><img style="width:12px; height:12px; position: relative;" src="link.png">   Share</a></li>
-<li><a href="#" id="playertoggle" onclick="toggle_visibility('divResize');"><img style="width:12px; height:12px; position: relative;" src="player.png">   Player</a></li>
-<li><a href="#" id="magnifytoggle" onclick="lensactive = !lensactive;"> <img style="width:12px; height:12px; position: relative;" src="magnify.png">   Magnifier</a></li>
-<li><a href="#" id="pagetoggle" onclick="transissionactive = !transissionactive;"><img style="width:12px; height:12px; position: relative;" src="page.png">   Page turn</a></li>
+<li><a class="sharelink" href="#" id="share" onclick="document.getElementById('shareframe').src = 'share.php?opus=_OPUS_&t=' + Math.round(t).toString(); popup('popUpDiv');"><img style="width:12px; height:12px; position: relative;" src="res/link.png">   Share</a></li>
+<li><a href="#" id="playertoggle" onclick="toggle_visibility('divResize');"><img style="width:12px; height:12px; position: relative;" src="res/player.png">   Player</a></li>
+<li><a href="#" id="magnifytoggle" onclick="lensactive = !lensactive;"> <img style="width:12px; height:12px; position: relative;" src="res/magnify.png">   Magnifier</a></li>
+<li><a href="#" id="pagetoggle" onclick="transissionactive = !transissionactive;"><img style="width:12px; height:12px; position: relative;" src="res/page.png">   Page turn</a></li>
 
   _MENU_
 </ul>
@@ -458,11 +458,11 @@ var skiptime = 0;
       }); 
  });
 </script>
-<div id="leftbutton"><img src="left.png" style="width:32px;height:32px;" onclick="previous();"></div>
-<div id="rightbutton"><img src="right.png" style="width:32px;height:32px;" onclick="next();"></div>
+<div id="leftbutton"><img src="res/left.png" style="width:32px;height:32px;" onclick="previous();"></div>
+<div id="rightbutton"><img src="res/right.png" style="width:32px;height:32px;" onclick="next();"></div>
 	
 <div id="controls">
-<div style="display:inline"><div class="tooltip"><img style="width:12px; height:12px;" src="info.png">
+<div style="display:inline"><div class="tooltip"><img style="width:12px; height:12px;" src="res/info.png">
   <span class="tooltiptext"><b>Score </b>_SCORE_ <br>
 <b>Music </b>_MUSIC_</span>
 </div>
@@ -473,10 +473,10 @@ var skiptime = 0;
 <div id="synccontrol" style="float:right;cursor:pointer;color:lightgreen;font-weight: bold;" onclick="togglesync();">SYNC</div>
 
 <div id="bar" style="color:#ffffff; background-color:#000000; padding:3px;border-radius: 6px;">
-<a href="#" onclick="player.playVideo();"><img style="width:16px; height:16px; position: relative;" src="play.png"></a>
-<a href="#" onclick="player.pauseVideo();"><img style="width:16px; height:16px; position: relative;" src="pause.png"></a>	
+<a href="#" onclick="player.playVideo();"><img style="width:16px; height:16px; position: relative;" src="res/play.png"></a>
+<a href="#" onclick="player.pauseVideo();"><img style="width:16px; height:16px; position: relative;" src="res/pause.png"></a>
 <!-- <a href="#" onclick="player.stopVideo();"><img style="width:16px; height:16px; position: relative;" src="stop.png"></a>-->
-<a href="#" onclick="player.seekTo(_BEGIN_ +  _OFFSET_);"><img style="width:16px; height:16px; position: relative;" src="reset.png"></a>&nbsp;
+<a href="#" onclick="player.seekTo(_BEGIN_ +  _OFFSET_);"><img style="width:16px; height:16px; position: relative;" src="res/reset.png"></a>&nbsp;
 <div id="baro" style="display: inline;">
 LOADING...</div>
 <div id="skip" class="skip" style="display: inline; visibility: hidden; color: #ddddff; float: right; cursor: pointer;">

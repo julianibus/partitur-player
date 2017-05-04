@@ -5,8 +5,8 @@
 <meta name="description" content="Musik, Bild, Text und Notenmaterial - der Online Partitur Player erlaubt es, alle Aspekte eines großen musikalischen Werks (Opern, Sinfonien  etc.) auf einen Bick zu erleben.">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta id="meta" name="viewport" content="width=device-width; initial-scale=0.8" />
-<link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
-<link rel="stylesheet" href="style.css">
+<link rel='shortcut icon' type='image/x-icon' href='res/favicon.ico' />
+<link rel="stylesheet" href="css/style.css">
 
 </head>
 <body>
